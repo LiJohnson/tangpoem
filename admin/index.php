@@ -3,9 +3,15 @@ include '../config.php';
 include INCLUDE_PATH . '/function.php';
 include ACTION_PATH . '/AdminAction.php';
 
-$page = $_GET['page'] == 'author' ? 'author' : 'poem';
+$page = $_GET['page'] ? $_GET['page'] : ($_GET['action'] ? $_GET['action'] : 'poem');
+$page = preg_replace('/\-/', '_', $page);
+
 $action = new AdminAction();
 $data = call_user_func(array(&$action , $page));
+
+if($_GET['ajax'] || preg_match('/json/', $_SERVER['HTTP_ACCEPT'])){
+	echo json_encode($data);exit;
+}
 
 if( is_array($data) ){
 	$page = $data['page'] ? $data['page'] : $page;

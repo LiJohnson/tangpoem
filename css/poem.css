@@ -1,7 +1,1 @@
-/*
-admin
-*/
-#admin .nav li.active a {
-  text-decoration: none;
-  background-color: #eee;
-}
+#admin .nav li.active a{text-decoration:none;background-color:#eee}#admin form textarea{height:200px}#admin .left{overflow-y:scroll;max-height:1300px}
