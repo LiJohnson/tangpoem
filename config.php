@@ -9,7 +9,7 @@ define("ACTION_PATH" , INCLUDE_PATH . '/action');
 if( defined('SAE_TMP') ){
 	define("SITE_URL" , 'http://shit.com');
 }else{
-
+	
 	define("SITE_URL" , 'http://lcs.com/bitbucket/tangpoem');
 
 	define("MY_DB_HOST" , 'lcs.com');

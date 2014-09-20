@@ -58,7 +58,7 @@ class AdminAction extends BaseAction{
 	}
 
 	public function author(){
-			return 'author';
-		}
+		return 'author';
+	}
 }
 ?>

@@ -55,7 +55,9 @@ class PoemDao extends BaseDao{
 	}
 
 	public function getById( $id ){
-		return $id > 0 ? $this->unserPoem($this->getOne(array('poemId' => $id))) : false;
+		$sql = "SELECT poem.* , author.name FROM poem LEFT JOIN author ON poem.authorId = author.authorId WHERE poemId = " . $id;
+		//echo $sql;
+		return $id > 0 ? $this->unserPoem($this->getLine($sql)) : false;
 	}
 
 	public function addPoem(){

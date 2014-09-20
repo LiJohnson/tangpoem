@@ -1,0 +1,60 @@
+<?php
+
+include ACTION_PATH . '/BaseAction.php';
+include CLASS_PATH . '/BaseDao.php';
+include DAO_PATH . '/PoemDao.php';
+include DAO_PATH . '/AuthorDao.php';
+
+/**
+ * @author lcs
+ * @date 2014-09-20
+ * @desc 网站前台action
+ */
+class TangPoemAction extends BaseAction{
+	
+	private $poemDao;
+	private $author;
+
+	public function __construct(){
+		$this->poemDao = new PoemDao();
+		$this->authorDao = new AuthorDao();
+	}
+
+	/**
+	 * [index description]
+	 * @return [type] [description]
+	 */
+	public function info( $data ){
+		return $data;
+	}
+
+	/**
+	 * [index description]
+	 * @return [type] [description]
+	 */
+	public function cate( $data ){
+		$data['poems'] = $this->poemDao->getAll();
+		$data['authors'] = $this->authorDao->getAll();
+		return $data;
+	}
+
+	public function detail($data){
+		return $this->poemDao->getById($_GET['poemId']);
+	}
+
+	/**
+	 * [index description]
+	 * @return [type] [description]
+	 */
+	public function about(){
+		return "about";
+	}
+
+	/**
+	 * [index description]
+	 * @return [type] [description]
+	 */
+	public function more(){
+		return "more";
+	}
+}

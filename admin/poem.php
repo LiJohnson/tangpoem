@@ -114,7 +114,6 @@ $(function(){
 			$list.empty();
 			$.each(data, function(index,poem) {
 				var $li = $("<li class='list-group-item' data-toggle='tooltip' data-placement='top' data-html=true ><a href='javascript:;' ><span html-title></span> - <span html-name ></span></a><a class=close >&times;</a></li>");
-				//$li.prop("title" , poem.content.join("<br>")).tooltip();
 				$li.data(poem);
 				$list.append($li.setHtml(poem));
 			});
