@@ -79,7 +79,8 @@ class PoemDao extends BaseDao{
 				'comment' => $param['comment'],
 				'url' => $param['url'],
 				'rhymed' => $param['rhymed']
-				))
+				)),
+			'time' => date("Y-m-d G:i:s")
 			), 'poemId = ' . $param['poemId']);	
 	}
 }
