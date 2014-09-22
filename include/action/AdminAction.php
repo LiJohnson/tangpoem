@@ -57,6 +57,26 @@ class AdminAction extends BaseAction{
 		return $this->poemDao->delete('poemId = ' . $_POST['poemId']);
 	}
 
+	/**
+	 * 文件上传（诗的音频）
+	 * @return [type] [description]
+	 */
+	public function upload(){
+		include CLASS_PATH . "/MyFileSystem.php";
+		$fs = new MyFileSystem( defined("SAE_TMP_PATH")  ? 'wp' : UPLOAD_PATH );
+
+		if( !defined("SAE_TMP_PATH")  ){
+			$_FILES['file']['name'] = iconv("UTF-8","gb2312", $_POST['name']);
+		}
+		
+		
+		if($fs->upload("/tang-poem")) {
+			$url = defined("SAE_TMP_PATH") ? 'http://shit.com' : SITE_URL . "/upload/tang-poem/";
+			return array( "url" => $url  . $_POST['name']);
+		}
+		return false;
+	}
+
 	public function author(){
 		return 'author';
 	}

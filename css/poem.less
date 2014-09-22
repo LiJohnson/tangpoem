@@ -28,6 +28,20 @@
 }
 
 /**
+ * 修正Myplayer样式 
+ */
+.my-player  {
+    *{
+    	-webkit-box-sizing: initial;
+    	    -moz-box-sizing: initial;
+    	    box-sizing: initial;
+    }
+    .btn{
+    	padding:0;
+    }
+}
+
+/**
  *admin
  */
 #admin{
@@ -41,5 +55,10 @@
 	.left{
 		overflow-y: scroll;
 		max-height: 1300px;
+	}
+	.my-player{
+		position: fixed;
+		right:0;
+		bottom: 0;
 	}
 }

@@ -5,6 +5,7 @@
  * @desc 诗Dao
  */
 class PoemDao extends BaseDao{
+
 	public function __construct(){
 		$this->setTable("poem");
 		parent::__construct();
@@ -78,7 +79,8 @@ class PoemDao extends BaseDao{
 				'note' => $param['note'],
 				'comment' => $param['comment'],
 				'url' => $param['url'],
-				'rhymed' => $param['rhymed']
+				'rhymed' => $param['rhymed'],
+				'audioIndex' => $param['audioIndex']
 				)),
 			'time' => date("Y-m-d G:i:s")
 			), 'poemId = ' . $param['poemId']);	

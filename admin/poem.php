@@ -17,11 +17,6 @@ $form = array(
 		'text' => '诗句'
 		),
 	array(
-		'id' => 'audio',
-		'type' => 'url',
-		'text' => '音频'
-		),
-	array(
 		'id' => 'type',
 		'type' => 'select',
 		'text' => '律句',
@@ -46,6 +41,11 @@ $form = array(
 		'id' => 'url',
 		'type' => 'url',
 		'text' => '源'
+		),
+	array(
+		'id' => 'audio',
+		'type' => 'url',
+		'text' => '音频'
 		)
 	);
 ?>
@@ -69,10 +69,15 @@ $form = array(
 		</div>
 		<div class="col-md-10" >
 			<form class="form-horizontal" name="poem" >
+				<div class="form-group">
+					<div class="col-sm-offset-1 col-sm-10">
+						<input type="submit" name="submit" value="保存" class="btn btn-default" />
+					</div>
+				</div>
 				<input type="hidden" name="poemId" />
 				<?php
 				foreach ($form as $input) {
-					echo "<div class='form-group'>";
+					echo "<div class='form-group  has-feedback'>";
 					echo "    <label for='$input[id]' class='col-sm-1 control-label'>$input[text]</label>";
 					echo "	<div class='col-sm-10'>";
 
@@ -87,15 +92,43 @@ $form = array(
 					}else{
 						echo "		<input type='text' name='$input[id]' class='form-control' id='$input[id]' placeholder='$input[text]'>";
 					}
+
+					if( $input['id'] == 'audio' ){
+						echo "<span class='glyphicon glyphicon-volume-up form-control-feedback player'></span>";
+					}
 					
 					echo "    </div>";
 					echo "</div>";
 				}
 				?>
-
+				<div class="form-group has-feedback">
+					<label class="col-sm-1">
+						上传 
+					</label>
+					<div class=" col-sm-10">
+						<input type=file name=file />
+					</div>
+				</div>
+				<div class="form-group has-feedback">
+					<div class="col-sm-offset-1 col-sm-10">
+						<ul class="list-group poem-audio-setting" >
+							<li class="list-group-item" >
+								
+								<div class="input-group">
+									<div class="input-group-addon">
+										<span></span>
+										<a href="javascript:;" class="glyphicon glyphicon-exclamation-sign"></a>
+									</div>
+									<input class="form-control col-md-2"  type="number" name="audioIndex[]" step="0.001">
+									<i class='glyphicon glyphicon-volume-up form-control-feedback play-index'></i>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
 				<div class="form-group">
-					<div class="col-sm-offset-2 col-sm-10">
-						<button type="submit" class="btn btn-default">commit</button>
+					<div class="col-sm-offset-1 col-sm-10">
+						<button type="submit" class="btn btn-default">保存</button>
 					</div>
 				</div>
 			</form>
@@ -106,6 +139,9 @@ $form = array(
 $(function(){
 	var $list = $("ul.poem-list");
 	var $form = $("form[name=poem]");
+	var $poemAudio = $("ul.poem-audio-setting");
+	var $tmp = $poemAudio.find('li').remove();
+	var playerUI = new MyPlayerUI();
 
 	var loadPoemList = function(){
 		$list.html("<li>loading</li>");
@@ -122,9 +158,28 @@ $(function(){
 
 	var loadPoem = function(id){
 		$.post("?action=loadPoem&ajax=1",{poemId:id},function(poem){
+			poem.info.audioIndex = poem.info.audioIndex || [];
+			$poemAudio.empty( );
+			$.each(poem.content, function(index, li) {
+				var $li = $tmp.clone();
+				$li.find("span").html(li);
+				$poemAudio.append($li);
+				$li.find("input").val(poem.info.audioIndex[index]);
+			});
+
 			poem.content = poem.content.join("\n");
 			$form.setData(poem).setData(poem.info);
+
+			poem.audio && playerUI.player.play(poem.audio);
+			playerUI.player.pause();
 		});
+	};
+
+	var upload = function(file){
+		new $().uploadFile("?action=upload&ajax=1" ,{file:file,name:file.name},function(data){
+			$form.find("input[name=audio]").val(data.url);
+			$form.find("input[name=file]").val("");
+		})
 	};
 
 	$(".left form select").change(function(){
@@ -156,6 +211,7 @@ $(function(){
 			});
 		}});
 	});
+
 	$form.submit(function(event) {
 		$form.postData("?action=updatePoem",function(data){
 			if( data.result ){
@@ -166,7 +222,41 @@ $(function(){
 			}
 		});
 		return false;
+	}).on("click" , ".player" , function(){
+		
+		playerUI.player.isPlaying() ? 
+		playerUI.player.pause() :
+		playerUI.player.play();
+	}).on("click",".poem-audio-setting a",function(){
+		var $inputs = $form.find(".poem-audio.setting input");
+		var $this = $(this).parents("li:eq(0)").find("input");
+		var step = 0;
+		$this.val(playerUI.player.audio.currentTime.toFixed(3));
+
+		$input.each(function(i){
+			if(i == 0)return;
+		});
+	}).on("click",".poem-audio-setting .play-index",function(){
+		playerUI.player.playFrom( $(this).prev().val() );
 	});
+
+	$form.find("input[name=audio]").getFile(function(file){
+		upload(file);
+	});
+
+	$form.find("input[type=file]").change(function(event) {
+		upload(this.files[0]);
+	});
+
 	loadPoemList();
+	$("body").append(playerUI.$player);
+	playerUI.$player.drag({handle:".control"}).css("position","fixed");
+	playerUI.player.playMode(playerUI.player.PLAY_MODE.one);
+
+	<?php
+	if( $_GET['poemId'] ){
+		echo "loadPoem($_GET[poemId])";
+	}
+	?>
 });
 </script>

@@ -5,11 +5,12 @@ define("ADMIN_PATH" , BASE_PATH . '/admin');
 define("CLASS_PATH" , INCLUDE_PATH . '/class');
 define("DAO_PATH" , INCLUDE_PATH . '/dao');
 define("ACTION_PATH" , INCLUDE_PATH . '/action');
+define("UPLOAD_PATH" , BASE_PATH . '/upload');
 
 if( defined('SAE_TMP') ){
 	define("SITE_URL" , 'http://shit.com');
 }else{
-	
+
 	define("SITE_URL" , 'http://lcs.com/bitbucket/tangpoem');
 
 	define("MY_DB_HOST" , 'lcs.com');

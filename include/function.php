@@ -13,6 +13,8 @@ function baseJSCSS(){
 	<?php
 
 	echo '<link rel="stylesheet" href="'. SITE_URL .'/css/poem.css'.'"/>';
+	echo '<link rel="stylesheet" href="'. SITE_URL .'/css/myPlayer.css'.'"/>';
+	echo '<script src="'.SITE_URL .'/js/myPlayer.js'.'" ></script>';
 	echo '<script src="'.SITE_URL .'/js/poem.js'.'" ></script>';
 }
 
