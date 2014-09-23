@@ -177,7 +177,7 @@ $(function(){
 
 	var upload = function(file){
 		new $().uploadFile("?action=upload&ajax=1" ,{file:file,name:file.name},function(data){
-			$form.find("input[name=audio]").val(data.url);
+			$form.find("input[name=audio]").val(encodeURI(data.url));
 			$form.find("input[name=file]").val("");
 		})
 	};

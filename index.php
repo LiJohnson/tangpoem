@@ -32,16 +32,17 @@ foreach ($nav as $item) {
 	}
 }
 $cur = $cur ? $cur : $nav[0];
+$title = $data['title'] ? $data['title'] : $cur['title'];
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title><?php echo $cur['title']; ?> | 唐诗三百首</title>
+	<title><?php echo $title; ?> | 唐诗三百首</title>
 	<?php baseJSCSS(); ?>
 </head>
-<body id="tang-poem" class="<?php echo $cur['action']; ?>" >
+<body id="tang-poem" class="<?php echo $action; ?>" >
 	<header>
 		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 			<div class="container">

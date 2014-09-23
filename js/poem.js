@@ -18,16 +18,32 @@
 	};
 
 	
-	MyPlayer.prototype.playFrom = function(start , end){
-		if(!start)return;
-		
-		if( end && end > start ){
-			this.on("process" , function(data){
-				data.cur > end && this.pause();
+	MyPlayer.prototype.playFrom = (function(){
+		var pauseIndex = 0;
+		var hasInit = false;
+		var init = function(p){
+			if(hasInit)return;
+			hasInit = true;
+			p.on("progress",function(data){
+				pauseIndex && data.cur > pauseIndex && p.pause();
 			});
-		}
+		};
+		return function(start , end){
+			if(start == void 0)return;
+			init(this);
+			if( end && end > start ){
+				pauseIndex = end;
+			}else{
+				pauseIndex = 0;
+			}
 
-		this.play();
-		this.audio.currentTime = start;
-	};
+			this.play();
+			this.audio.currentTime = start;
+		};
+	})();
+	
+	MyPlayer.prototype.set = function(song){
+		this.play(song);
+		this.pause();
+	}
 })();

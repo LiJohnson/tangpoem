@@ -17,12 +17,54 @@
 		}
 	}
 
+	h1 small{
+		margin-left: 30px;
+		&:before{
+			content: '\2014 \00A0';
+		}
+	}
+
+	pre{
+		background-color: transparent;
+		border: none;
+		font-size: 15px;
+	}
+	
 	&.info{
 		p{
 			color: #333;
 			margin: 15px 0 5px 0;
 			text-indent: 2em;
 			line-height: 24px;
+		}
+	}
+	
+	.poem-content{
+		li{
+			margin: 10px 0;
+		}
+	}
+
+
+	.no-audio{
+		.btn-audio{
+			display: none;
+		}
+	}
+	.btn-audio{
+		cursor: pointer;
+		&:hover{
+			.glyphicon:before{
+				content:"\e037"
+			}
+		}
+	}
+	.theme-1{
+		.poem-content{
+			font-size: 25px;	
+		}
+		pre{
+			font-size: 20px;
 		}
 	}
 }
