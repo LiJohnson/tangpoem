@@ -67,7 +67,7 @@ $form = array(
 			<ul class="list-group poem-list" >
 			</ul>
 		</div>
-		<div class="col-md-10" >
+		<div class="col-md-9" >
 			<form class="form-horizontal" name="poem" >
 				<div class="form-group">
 					<div class="col-sm-offset-1 col-sm-10">
@@ -132,6 +132,35 @@ $form = array(
 					</div>
 				</div>
 			</form>
+		</div>
+		<div class="col-md-1 format-tool">
+			<ul class="list-group">
+				<li class="list-group-item">
+					<a href="javascript:;" class="btn btn-primary preview">
+						预览
+					</a>
+				</li>
+				<li class="list-group-item">
+					<a href="javascript:;" class="btn btn-primary space">
+						空格
+					</a>
+				</li>
+				<li class="list-group-item">
+					<a href="javascript:;" class="btn btn-primary replace">
+						换行
+					</a>
+				</li>
+				<li class="list-group-item">
+					<a href="javascript:;" class="btn btn-primary split">
+						拆分
+					</a>
+				</li>
+				<li class="list-group-item">
+					<a href="javascript:;" class="btn btn-danger reset">
+						重置
+					</a>
+				</li>
+			</ul>
 		</div>
 	</div>
 </div>
@@ -274,4 +303,32 @@ $(function(){
 	}
 	?>
 });
+</script>
+
+<script>
+	$(function(){
+		var $tool = $(".format-tool");
+		var $textarea = false;
+
+		$(document).on("focus","textarea",function(){
+			$textarea = $(this);
+		});
+
+		$tool.on("click",".preview",function(){
+			window.open("<?php echo SITE_URL ?>?action=detail&poemId=" +$("input[name=poemId]").val(),"_blank");
+		}).on("click",".space",function(){
+			var text = $textarea.val().replace(/\n/g,"##");
+			$textarea.val(text.replace(/\s+/g,"").replace(/##/g,"\n"));
+		}).on("click",".replace",function(){
+			var text = $textarea.val().replace(/\n/g,"##");
+			$textarea.val(text.replace(/\s+/g,"\n").replace(/##/g,"\n"));
+		}).on("click",".split",function(){
+			var text = $textarea.val().split("【");
+			$("form[name=poem] textarea:eq(0)").val(text[0]);
+			$("form[name=poem] textarea:eq(1)").val(text[1]);
+			$("form[name=poem] textarea:eq(2)").val(text[2]);
+		}).on("click",".reset",function(){
+			location.reload();
+		});
+	});
 </script>
