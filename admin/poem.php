@@ -170,8 +170,9 @@ $(function(){
 			poem.content = poem.content.join("\n");
 			$form.setData(poem).setData(poem.info);
 
-			poem.audio && playerUI.player.play(poem.audio);
-			playerUI.player.pause();
+			playerUI.player.set(poem.audio);
+
+			updateUrl(poem.poemId);
 		});
 	};
 
@@ -180,6 +181,20 @@ $(function(){
 			$form.find("input[name=audio]").val(encodeURI(data.url));
 			$form.find("input[name=file]").val("");
 		})
+	};
+
+	var updateUrl = function(poemId){
+		var url = location.href;
+		if (!location.search) {
+			url += "?poemId=" + poemId;
+		} else {
+			if( url.match(/poemId=\d+/) ){
+				url = url.replace(/poemId=\d+/,"poemId=" + poemId);
+			}else{
+				url += "&poemId=" + poemId;
+			}
+		}
+		history.pushState({},0,url);
 	};
 
 	$(".left form select").change(function(){
