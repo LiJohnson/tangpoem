@@ -324,9 +324,18 @@ $(function(){
 			$textarea.val(text.replace(/\s+/g,"\n").replace(/##/g,"\n"));
 		}).on("click",".split",function(){
 			var text = $textarea.val().split("【");
-			$("form[name=poem] textarea:eq(0)").val(text[0]);
-			$("form[name=poem] textarea:eq(1)").val(text[1]);
-			$("form[name=poem] textarea:eq(2)").val(text[2]);
+			while( text.length ){
+				var t = text.pop();
+				if( t.indexOf("注解") == 0){
+					$("form[name=poem] textarea[name=note]").val("【" + t);
+				}else if( t.indexOf("韵译") == 0){
+					$("form[name=poem] textarea[name=rhymed]").val("【" + t);
+				}else if( t.indexOf("评析") == 0){
+					$("form[name=poem] textarea[name=comment]").val("【" + t);
+				}else{
+					$("form[name=poem] textarea[name=content]").val(t.replace(/\s+/,"\n"));
+				}
+			}
 		}).on("click",".reset",function(){
 			location.reload();
 		});
