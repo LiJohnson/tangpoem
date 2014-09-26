@@ -11,7 +11,7 @@
 		<ul class="list-group">
 			<?php
 			foreach ($data['authors'] as $author) {
-				echo "<li class='list-group-item'><a href='javascript:;' data-author-id='$author[authorId]'>$author[name]</a></li>";
+				echo "<li class='list-group-item'><a href='?action=cate&author=$author[name]' data-author-id='$author[authorId]'>$author[name]</a></li>";
 			}
 			?>
 		</ul>

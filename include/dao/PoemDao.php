@@ -6,6 +6,8 @@
  */
 class PoemDao extends BaseDao{
 
+	private $selectSql = 'SELECT poem.poemId , poem.content, poem.title , author.name FROM poem LEFT JOIN author ON poem.authorId = author.authorId WHERE 1=1 ';
+
 	public function __construct(){
 		$this->setTable("poem");
 		parent::__construct();
@@ -45,7 +47,7 @@ class PoemDao extends BaseDao{
 	}
 
 	public function getAll( $key = false , $type = false ){
-		$sql = "SELECT poem.poemId , poem.content, poem.title , author.name FROM poem LEFT JOIN author ON poem.authorId = author.authorId WHERE 1=1 ";
+		$sql = $this->selectSql;
 		if( $key ){
 			$sql .= " AND ( poem.content LIKE '%$key%' OR poem.title LIKE '%$key%' OR author.name LIKE '%$key%') ";
 		}
@@ -84,6 +86,20 @@ class PoemDao extends BaseDao{
 				)),
 			'time' => date("Y-m-d G:i:s")
 			), 'poemId = ' . $param['poemId']);	
+	}
+
+	public function searchPoem( $author , $type , $key ){
+		$sql = $this->selectSql;
+		if( $author ){
+			$sql .= " AND author.name LIKE '". $author . "'";
+		}
+		if( $type ){
+			$sql .= " AND poem.type LIKE '%". $type ."%'";
+		}
+		if( $key ){
+			$sql .= " AND (poem.title LIKE '%". $key ."%' OR poem.content LIKE '%".$key."%' ) " ;
+		}
+		return $this->unserPoem($this->getData($sql));
 	}
 }
 ?>

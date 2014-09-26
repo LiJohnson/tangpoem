@@ -33,7 +33,7 @@ class TangPoemAction extends BaseAction{
 	 * @return [type] [description]
 	 */
 	public function cate( $data ){
-		$data['poems'] = $this->poemDao->getAll();
+		$data['poems'] = $this->poemDao->searchPoem( $_GET['author']  , $_GET['type'] , $_GET['key']);
 		$data['authors'] = $this->authorDao->getAll();
 		return $data;
 	}
