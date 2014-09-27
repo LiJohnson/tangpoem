@@ -93,8 +93,10 @@ class PoemDao extends BaseDao{
 		if( $author ){
 			$sql .= " AND author.name LIKE '". $author . "'";
 		}
-		if( $type ){
-			$sql .= " AND poem.type LIKE '%". $type ."%'";
+		if( $type && count($type)){
+			foreach ($type as $val) {
+				$sql .= " AND poem.type LIKE '%". $val ."%'";	
+			}
 		}
 		if( $key ){
 			$sql .= " AND (poem.title LIKE '%". $key ."%' OR poem.content LIKE '%".$key."%' ) " ;
