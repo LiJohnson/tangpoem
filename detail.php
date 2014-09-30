@@ -2,13 +2,13 @@
 <?php 
 $audioClass = $data['audio'] ? '' : 'no-audio';
 
-echo "<h1 class='$audioClass' ><span class='play-all btn-audio'><i class='glyphicon glyphicon-volume-up' ></i></span>$data[title]<small>$data[name]</small></h1>";
+echo "<h1 class='$audioClass' ><span class='play-all btn-audio'><i class='glyphicon glyphicon-volume-down' ></i></span>$data[title]<small>$data[name]</small></h1>";
 echo "<p><a href=admin/?action=poem&poemId=$data[poemId] target='_blank'>edit</a></p>";
 echo "<ul class='list-unstyled poem-content $audioClass' >";
 foreach ($data['content'] as $i => $li) {
 	$start = $data['info']['audioIndex'][$i];
 	$end = $data['info']['audioIndex'][$i+1];
-	echo "<li><span>$li</span> <button class='btn btn-default btn-xs btn-audio' data-start='$start' data-end='$end' ><i class='glyphicon glyphicon-volume-up' ></i> </button></li>";
+	echo "<li><span>$li</span> <button class='btn btn-default btn-xs btn-audio' data-start='$start' data-end='$end' ><i class='glyphicon glyphicon-volume-down' ></i> </button></li>";
 }
 echo "</ul>";
 echo "<hr>";
