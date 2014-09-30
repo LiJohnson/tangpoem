@@ -7,7 +7,7 @@ define("DAO_PATH" , INCLUDE_PATH . '/dao');
 define("ACTION_PATH" , INCLUDE_PATH . '/action');
 define("UPLOAD_PATH" , BASE_PATH . '/upload');
 
-if( defined('SAE_TMP') ){
+if( defined('SAE_TMP_PATH') ){
 	define("SITE_URL" , 'http://shit.com');
 }else{
 
