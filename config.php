@@ -8,7 +8,7 @@ define("ACTION_PATH" , INCLUDE_PATH . '/action');
 define("UPLOAD_PATH" , BASE_PATH . '/upload');
 
 if( defined('SAE_TMP_PATH') ){
-	define("SITE_URL" , 'http://shit.com');
+	define("SITE_URL" , 'http://webbm.sinaapp.com');
 }else{
 
 	define("SITE_URL" , 'http://lcs.com/bitbucket/tangpoem');
