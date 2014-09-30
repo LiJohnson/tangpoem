@@ -11,7 +11,7 @@ if( defined('SAE_TMP_PATH') ){
 	define("SITE_URL" , 'http://webbm.sinaapp.com');
 }else{
 
-	define("SITE_URL" , 'http://lcs.com/bitbucket/tangpoem');
+	define("SITE_URL" , 'http://lcs.com/sae/webbm/2');
 
 	define("MY_DB_HOST" , 'lcs.com');
 	define("MY_DB_NAME" , 'poem');
