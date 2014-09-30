@@ -1,6 +1,6 @@
 <?php 
-$types = ['五言','七言','古诗','乐府','绝句','律诗'];
-$selected = is_array($_GET['type']) ? $_GET['type'] : [];
+$types = array('五言','七言','古诗','乐府','绝句','律诗');
+$selected = is_array($_GET['type']) ? $_GET['type'] : array();
 ?>
 <div class="row">
 	<div class="col-md-12">
@@ -38,7 +38,7 @@ $selected = is_array($_GET['type']) ? $_GET['type'] : [];
 					echo "<div class=col-md-4 ><a href='?action=detail&poemId=$poem[poemId]' >$poem[title]</a></div>";
 				}	
 			}else{
-				echo "no match";	
+				echo "没有找到你要的哦~";	
 			}
 			?>
 		</div>
