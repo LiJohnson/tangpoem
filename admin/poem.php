@@ -160,6 +160,12 @@ $form = array(
 						重置
 					</a>
 				</li>
+				<li class="list-group-item">
+					<a href="javascript:;" class="btn btn-success save">
+						保存
+					</a>
+				</li>
+
 			</ul>
 		</div>
 	</div>
@@ -338,6 +344,9 @@ $(function(){
 			}
 		}).on("click",".reset",function(){
 			location.reload();
+		}).on("click" , ".save" , function(){
+			$("form[name=poem]").trigger('submit');
 		});
 	});
 </script>
+
