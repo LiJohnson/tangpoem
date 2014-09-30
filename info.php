@@ -7,6 +7,6 @@
 		<p>《唐诗三百首》被世界纪录协会收录为中国流传最广的诗词选集。</p>
 	</div>
 	<div class="col-md-4">
-		<img src="http://ww1.sinaimg.cn/large/5e22416bgw1ekj73ma4tfj207g0b774j.jpg" >
+		<img class="img-rounded" src="http://ww1.sinaimg.cn/large/5e22416bgw1ekj73ma4tfj207g0b774j.jpg" >
 	</div>
 </div>
