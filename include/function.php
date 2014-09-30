@@ -10,12 +10,15 @@ function baseJSCSS(){
 	<script src="http://gtbcode.sinaapp.com/load.php?type=js&load=jquery.js,jquery.plugin.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 	<script>$.box = $.box3 || $.box;</script>
-	<?php
+	
 
-	echo '<link rel="stylesheet" href="'. SITE_URL .'/css/poem.css'.'"/>';
-	echo '<link rel="stylesheet" href="'. SITE_URL .'/css/myPlayer.css'.'"/>';
-	echo '<script src="'.SITE_URL .'/js/myPlayer.js'.'" ></script>';
-	echo '<script src="'.SITE_URL .'/js/poem.js'.'" ></script>';
+	<link rel="shutcut icon" href="<?php echo SITE_URL;?>/img/T.png"/>
+
+	<link rel="stylesheet" href="<?php echo SITE_URL;?>/css/poem.css"/>
+	<link rel="stylesheet" href="<?php echo SITE_URL;?>/css/myPlayer.css"/>
+	<script src="<?php echo SITE_URL;?>/js/myPlayer.js" ></script>
+	<script src="<?php echo SITE_URL;?>/js/poem.js" ></script>
+	<?php
 }
 
 /**
