@@ -9,7 +9,7 @@ define("UPLOAD_PATH" , BASE_PATH . '/upload');
 
 if( defined('SAE_TMP_PATH') ){
 	define("SITE_URL" , 'http://webbm.sinaapp.com');
-	
+	define("MY_DB_NAME" , false);
 	//webbm
 	define( "WB_AKEY" , '713047838' );
 	define( "WB_SKEY" , 'edb01a4f899c7455436f3605571ac6a1' );
