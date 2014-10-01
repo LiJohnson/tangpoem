@@ -1,3 +1,6 @@
 <?php
-echo date("Y-m-d G:i:s");
+session_start();
+var_dump($_SESSION);
+$_SESSION['a'] = $_SESSION['a'] ? array( 'ha' => $_SESSION['a'] ) : array(5); 
+
 ?>

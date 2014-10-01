@@ -75,7 +75,7 @@ $title = is_array($data) && $data['title'] ? $data['title'] : $cur['title'];
 	</header>
 
 	<div class="container">
-		<?php include BASE_PATH . "/$page.php"; ?>
+		<?php include BASE_PATH . "/$page.php";  // var_dump($_SESSION); ?>
 	</div>
 </body>
 </html>
