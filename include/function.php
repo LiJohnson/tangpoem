@@ -41,4 +41,20 @@ function ser($data){
 function unser($data){
 	return unserialize(unserialize($data));
 }
+
+/**
+ * 获取用户信息
+ * @return [type] [description]
+ */
+function getUser(){
+	return $_SESSION['user'];
+}
+
+/**
+ * 是否已经登录
+ * @return boolean [description]
+ */
+function isLogin(){
+	return !!$_SESSION['user'];
+}
 ?>

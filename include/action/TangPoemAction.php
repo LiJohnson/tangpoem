@@ -1,10 +1,11 @@
 <?php
+session_start();
 
 include ACTION_PATH . '/BaseAction.php';
 include CLASS_PATH . '/BaseDao.php';
 include DAO_PATH . '/PoemDao.php';
 include DAO_PATH . '/AuthorDao.php';
-
+include CLASS_PATH . '/MyLogin.php';
 /**
  * @author lcs
  * @date 2014-09-20
@@ -64,5 +65,20 @@ class TangPoemAction extends BaseAction{
 	 */
 	public function test(){
 		return array('page' => 'about');
+	}
+
+	public function wbAuth(){
+		$login = new MyLogin();
+		$login->login();
+		$_SESSION['user'] = $login->getUserInfo();
+		header('Location: ' . SITE_URL);
+		die();
+	}
+
+	public function logout(){
+		$login = new MyLogin();
+		$login->logout();
+		header('Location: ' . SITE_URL);
+		die();
 	}
 }

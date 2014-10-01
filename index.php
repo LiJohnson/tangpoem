@@ -55,8 +55,19 @@ $title = is_array($data) && $data['title'] ? $data['title'] : $cur['title'];
 					}
 					?>
 				</ul>
+
 				<ul class="nav navbar-nav navbar-right" >
-					<li><a class="btn btn-default"><i class="glyphicon glyphicon-font"></i></a></li>
+					<li class="hide" ><a class="btn btn-default"><i class="glyphicon glyphicon-font"></i></a></li>
+					<?php 
+						$user = getUser();
+
+						if( $user ){
+					?>
+						<li><a href="http://weibo.com/<?=$user[id]?>" target='_blank' ><?=$user[name]?></a></li>
+						<li><a href="?action=logout">退出</a></li>
+					<?php }else{ ?>
+						<li><a href="?action=wbAuth">微博登录</a></li>
+					<?php } ?>
 				</ul>
 			   
 			</div>
@@ -64,7 +75,7 @@ $title = is_array($data) && $data['title'] ? $data['title'] : $cur['title'];
 	</header>
 
 	<div class="container">
-		<?php include BASE_PATH . "/$page.php";?>
+		<?php include BASE_PATH . "/$page.php"; ?>
 	</div>
 </body>
 </html>

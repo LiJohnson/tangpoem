@@ -9,6 +9,10 @@ define("UPLOAD_PATH" , BASE_PATH . '/upload');
 
 if( defined('SAE_TMP_PATH') ){
 	define("SITE_URL" , 'http://webbm.sinaapp.com');
+	
+	//webbm
+	define( "WB_AKEY" , '713047838' );
+	define( "WB_SKEY" , 'edb01a4f899c7455436f3605571ac6a1' );
 }else{
 
 	define("SITE_URL" , 'http://lcs.com/sae/webbm/2');
@@ -17,6 +21,10 @@ if( defined('SAE_TMP_PATH') ){
 	define("MY_DB_NAME" , 'poem');
 	define("MY_DB_USER" , 'lcs');
 	define("MY_DB_PASS" , 'lcs');
+
+	//dev
+	define( "WB_AKEY" , '3600693014' );
+	define( "WB_SKEY" , '22325d36c32bc46cb553e87afc1b01be' );
 
 }
 ?>
