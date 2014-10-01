@@ -13,6 +13,7 @@ if( defined('SAE_TMP_PATH') ){
 	//webbm
 	define( "WB_AKEY" , '713047838' );
 	define( "WB_SKEY" , 'edb01a4f899c7455436f3605571ac6a1' );
+	define('WB_CALLBACL_URL', 'http://webbm.sinaapp.com/?action=wbAuth');
 }else{
 
 	define("SITE_URL" , 'http://lcs.com/sae/webbm/2');
