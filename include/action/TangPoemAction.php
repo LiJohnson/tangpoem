@@ -54,7 +54,15 @@ class TangPoemAction extends BaseAction{
 	 * [index description]
 	 * @return [type] [description]
 	 */
-	public function more(){
-		return "more";
+	public function classic(){
+		return array('page' => 'about');
+	}
+
+	/**
+	 * [index description]
+	 * @return [type] [description]
+	 */
+	public function test(){
+		return array('page' => 'about');
 	}
 }

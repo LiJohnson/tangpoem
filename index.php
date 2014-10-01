@@ -5,7 +5,7 @@ include ACTION_PATH . '/TangPoemAction.php';
 
 $action = $_GET['action'] ? $_GET['action'] : 'info';
 
-$action = preg_replace('/\-/', '_', $action);
+$page = $action = preg_replace('/\-/', '_', $action);
 
 $tangPoemAction = new TangPoemAction();
 $data = call_user_func(array(&$tangPoemAction , $action) , array('action' => $action));
@@ -14,15 +14,16 @@ if($_GET['ajax'] || preg_match('/json/', $_SERVER['HTTP_ACCEPT'])){
 	echo json_encode($data);exit;
 }
 
-if( is_array($data) ){
-	$action = $data['action'] ? $data['action'] : $action;
+if( is_array($data) && $data['page'] ){
+	$page = $data['page'];
 }
 
 $nav = array(
 	array('action'=> 'info' , 'title' => '简介'),
 	array('action'=> 'cate' , 'title' => '目录'),
 	array('action' => 'about' , 'title' => '关于'),
-	array('action' => 'more' , 'title' => '更多')
+	array('action' => 'classic' , 'title' => '经典'),
+	array('action' => 'test' , 'title' => '测验')
 );
 
 foreach ($nav as $item) {
@@ -32,7 +33,7 @@ foreach ($nav as $item) {
 	}
 }
 $cur = $cur ? $cur : $nav[0];
-$title = $data['title'] ? $data['title'] : $cur['title'];
+$title = is_array($data) && $data['title'] ? $data['title'] : $cur['title'];
 ?>
 
 <!DOCTYPE html>
@@ -63,7 +64,7 @@ $title = $data['title'] ? $data['title'] : $cur['title'];
 	</header>
 
 	<div class="container">
-		<?php include BASE_PATH . "/$action.php";?>
+		<?php include BASE_PATH . "/$page.php";?>
 	</div>
 </body>
 </html>
