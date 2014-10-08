@@ -7,11 +7,12 @@
 class AuthorDao extends BaseDao{
 	public function __construct(){
 		$this->setTable("author");
+		$this->setDebug(1);
 		parent::__construct();
 	}
 
 	public function getAll(){
-		return $this->getModelList(array());
+		return $this->getModelList(array() , 'ORDER BY CONVERT(name using gbk)');
 	}
 }
 ?>
