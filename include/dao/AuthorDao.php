@@ -7,7 +7,6 @@
 class AuthorDao extends BaseDao{
 	public function __construct(){
 		$this->setTable("author");
-		$this->setDebug(1);
 		parent::__construct();
 	}
 
