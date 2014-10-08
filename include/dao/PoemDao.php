@@ -6,7 +6,7 @@
  */
 class PoemDao extends BaseDao{
 
-	private $selectSql = 'SELECT poem.poemId , poem.content, poem.title , author.name FROM poem LEFT JOIN author ON poem.authorId = author.authorId WHERE 1=1 ';
+	private $selectSql = 'SELECT poem.poemId , poem.content, poem.title , poem.type , author.name FROM poem LEFT JOIN author ON poem.authorId = author.authorId WHERE 1=1 ';
 
 	public function __construct(){
 		$this->setTable("poem");
@@ -88,19 +88,19 @@ class PoemDao extends BaseDao{
 			), 'poemId = ' . $param['poemId']);	
 	}
 
-	public function searchPoem( $author , $type , $key ){
+	public function searchPoem( $author , $type , $key , $groupBy = 'name'){
 		$sql = $this->selectSql;
 		if( $author ){
 			$sql .= " AND author.name LIKE '". $author . "'";
 		}
-		if( $type && count($type)){
-			foreach ($type as $val) {
-				$sql .= " AND poem.type LIKE '%". $val ."%'";	
-			}
+		if( $type ){
+			$sql .= " AND poem.type LIKE '%". $type ."%'";
 		}
 		if( $key ){
-			$sql .= " AND (poem.title LIKE '%". $key ."%' OR poem.content LIKE '%".$key."%' ) " ;
+			$sql .= " AND (poem.title LIKE '%". $key ."%' OR author.name LIKE '%".$key."%' OR poem.content LIKE '%".$key."%' ) " ;
 		}
+
+		$sql .= ' ORDER BY CONVERT('.$groupBy.' USING GBK) ';
 		return $this->unserPoem($this->getData($sql));
 	}
 }
