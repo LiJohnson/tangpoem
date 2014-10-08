@@ -57,10 +57,41 @@ class PoemDao extends BaseDao{
 		return $this->unserPoem($this->getData($sql));
 	}
 
-	public function getById( $id ){
-		$sql = "SELECT poem.* , author.name FROM poem LEFT JOIN author ON poem.authorId = author.authorId WHERE poemId = " . $id;
-		//echo $sql;
+	/**
+	 * 获取一首诗
+	 * @param  [type] $id [description]
+	 * @return [type]     [description]
+	 */
+	public function getById( $id , $cur = false ){
+		$sql = "SELECT poem.* , author.name FROM poem LEFT JOIN author ON poem.authorId = author.authorId WHERE ";
+		
+		if( $cur == 'next' ){
+			$sql .= ' poemId > ' . $id . ' ORDER BY poemId ASC';
+		}else if( $cur == 'prev' ){
+			$sql .= ' poemId < ' . $id . ' ORDER BY poemId DeSC';
+
+		}else{
+			$sql .= ' poemId = ' . $id ;
+		}
 		return $id > 0 ? $this->unserPoem($this->getLine($sql)) : false;
+	}
+
+	/**
+	 * 获取下一首诗
+	 * @param  [type] $id [description]
+	 * @return [type]     [description]
+	 */
+	public function getNext( $id ){
+		return $this->getById($id , 'next');
+	}
+
+	/**
+	 * 获取上一首诗
+	 * @param  [type] $id [description]
+	 * @return [type]     [description]
+	 */
+	public function getPrev( $id ){
+		return $this->getById($id , 'prev');
 	}
 
 	public function addPoem(){

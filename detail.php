@@ -1,3 +1,10 @@
+<div class="row">
+	<?php if( $data['prev'] ){ ?>
+	<div class="col-md-6"><a href="?action=detail&poemId=<?php echo $data['prev']['poemId']?>">上一首</a></div>
+	<?php } if($data['next']){ ?>
+	<div class="col-md-6"><a href="?action=detail&poemId=<?php echo $data['next']['poemId']?>">下一首</a></div>
+	<?php } ?>
+</div>
 <div class='theme-1'>
 <?php 
 $audioClass = $data['audio'] ? '' : 'no-audio';

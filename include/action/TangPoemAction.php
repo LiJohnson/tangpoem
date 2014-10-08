@@ -43,7 +43,12 @@ class TangPoemAction extends BaseAction{
 	}
 
 	public function detail($data){
-		return $this->poemDao->getById($_GET['poemId']);
+		$poem = $this->poemDao->getById($_GET['poemId']);
+		if( $poem['poemId'] ){
+			$poem['next'] = $this->poemDao->getNext($poem['poemId']);
+			$poem['prev'] = $this->poemDao->getPrev($poem['poemId']);
+		}
+		return $poem;
 	}
 
 	/**
