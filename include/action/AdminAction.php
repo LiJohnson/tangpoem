@@ -1,6 +1,7 @@
 <?php
 include ACTION_PATH . '/BaseAction.php';
 include CLASS_PATH . '/BaseDao.php';
+include CLASS_PATH . '/MyKV.php';
 include DAO_PATH . '/PoemDao.php';
 include DAO_PATH . '/AuthorDao.php';
 
@@ -12,10 +13,12 @@ include DAO_PATH . '/AuthorDao.php';
 class AdminAction extends BaseAction{
 	private $poemDao ;
 	private $authorDao;
+	private $kv;
 
 	public function __construct(){
 		$this->poemDao = new PoemDao();
 		$this->authorDao = new AuthorDao();
+		$this->kv = new MyKV();
 	}
 
 	/**
@@ -34,6 +37,21 @@ class AdminAction extends BaseAction{
 		}
 
 		return array('types' => $types , 'authors' => $authors) ;
+	}
+
+	/**
+	 * 工具页面
+	 * @return [type] [description]
+	 */
+	public function tool(){
+		$keys = array('comment' => '' , 'login' => '');
+		foreach ( $keys as $key => $val) {
+			if( isset($_POST[$key]) ){
+				$this->kv->set($key , $_POST[$key]);
+			}
+			$keys[$key] = $this->kv->get($key);
+		}
+		return $keys;
 	}
 
 

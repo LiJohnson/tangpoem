@@ -31,6 +31,10 @@ foreach (array('note' , 'rhymed' , 'comment') as $key) {
 $data['info']['url'] = $_SERVER['HTTP_HOST'];
 ?>
 
+<?php 
+echo $kv->get("comment");
+?>
+
 </div>
 <script>
 	var audio = "<?php echo $data['audio'] ;?>";

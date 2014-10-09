@@ -2,6 +2,8 @@
 include 'config.php';
 include INCLUDE_PATH . '/function.php';
 include ACTION_PATH . '/TangPoemAction.php';
+include CLASS_PATH . '/MyKV.php';
+$kv = new MyKV();
 
 $action = $_GET['action'] ? $_GET['action'] : 'info';
 
@@ -49,12 +51,12 @@ if($content){
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:wb="http://open.weibo.com/wb">
 <head>
 	<meta charset="UTF-8">
 	<title><?php echo $title; ?> | 唐诗三百首</title>
 	<?php baseJSCSS(); ?>
-	
+
 	<meta name="keywords" content="唐诗三百首,唐诗,唐诗精选,古诗三百首,唐诗朗读,古诗朗读,在线朗读" />
 	<meta name="description" content="<?php echo $description;?>" />
 
@@ -85,16 +87,11 @@ if($content){
 
 					<ul class="nav navbar-nav navbar-right" >
 						<li class="hide" ><a class="btn btn-default"><i class="glyphicon glyphicon-font"></i></a></li>
-						<?php 
-							$user = getUser();
-
-							if( $user ){
-						?>
-							<li><a href="http://weibo.com/<?=$user[id]?>" target='_blank' ><?=$user[name]?></a></li>
-							<li><a href="?action=logout">退出</a></li>
-						<?php }else{ ?>
-							<li><a href="?action=wbAuth">微博登录</a></li>
-						<?php } ?>
+						<li>
+							<a>
+								<?php echo $kv->get("login");?>
+							</a>
+						</li>
 					</ul>
 					</div>
 			</div>

@@ -15,11 +15,13 @@ if($_GET['ajax'] || preg_match('/json/', $_SERVER['HTTP_ACCEPT'])){
 
 if( is_array($data) ){
 	$page = $data['page'] ? $data['page'] : $page;
+	extract($data);
 }
 
 $nav = array(
 	array('page'=> 'poem' , 'title' => '诗'),
-	array('page'=> 'author' , 'title' => '作者')
+	array('page'=> 'author' , 'title' => '作者'),
+	array('page'=> 'tool' , 'title' => '工具')
 	);
 ?>
 
@@ -27,7 +29,7 @@ $nav = array(
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>admin</title>
+	<title><?php echo $page ;?> | admin</title>
 	<?php baseJSCSS(); ?>
 </head>
 <body id="admin">
