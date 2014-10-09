@@ -6,11 +6,11 @@ $groupBy = $data['groupBy'];
 	<form class="form-inline" action="?action=cate" role="form" >
 		<div class="col-md-4" >
 			<div class="btn-group" data-toggle="buttons">
-				<label class="btn btn-primary <?php echo $data['groupByName'] ;?>">
-					<input type="radio" name="groupBy" value="name" <?php echo $data['groupByName'] ;?> >作者
-				</label>
 				<label class="btn btn-primary <?php echo $data['groupByType'] ;?>">
 					<input type="radio" name="groupBy" value="type"<?php echo $data['groupByType'] ;?> >章节
+				</label>
+				<label class="btn btn-primary <?php echo $data['groupByName'] ;?>">
+					<input type="radio" name="groupBy" value="name" <?php echo $data['groupByName'] ;?> >作者
 				</label>
 			</div>
 		</div>

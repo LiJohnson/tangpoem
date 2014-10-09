@@ -34,7 +34,7 @@ class TangPoemAction extends BaseAction{
 	 * @return [type] [description]
 	 */
 	public function cate( $data ){
-		$data['groupBy'] = $_GET['groupBy'] ? $_GET['groupBy'] : 'name';
+		$data['groupBy'] = $_GET['groupBy'] ? $_GET['groupBy'] : 'type';
 		$data['types'] = array('五言古诗','五言乐府','五言绝句','五言律诗','七言古诗','七言乐府','七言绝句','七言律诗');
 		$data['poems'] = $this->poemDao->searchPoem( $_GET['name']  , $_GET['type'] , $_GET['key'],$data['groupBy']);
 		$data['groupByName'] = $data['groupBy'] == 'name' ? 'active checked' : '';
