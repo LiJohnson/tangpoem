@@ -26,4 +26,8 @@ if( defined('SAE_TMP_PATH') ){
 	//dev
 	define( "WB_AKEY" , '3600693014' );
 	define( "WB_SKEY" , '22325d36c32bc46cb553e87afc1b01be' );
+	//define('WB_CALLBACL_URL', 'http://127.0.0.1:81/sae/webbm/2/?action=wbAuth');
+
 }
+
+

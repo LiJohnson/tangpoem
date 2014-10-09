@@ -30,7 +30,7 @@ class TangPoemAction extends BaseAction{
 	}
 
 	/**
-	 * [index description]
+	 * 目录页面
 	 * @return [type] [description]
 	 */
 	public function cate( $data ){
@@ -42,6 +42,11 @@ class TangPoemAction extends BaseAction{
 		return $data;
 	}
 
+	/**
+	 * 诗歌页面
+	 * @param  [type] $data [description]
+	 * @return [type]       [description]
+	 */
 	public function detail($data){
 		$poem = $this->poemDao->getById($_GET['poemId']);
 		if( $poem['poemId'] ){

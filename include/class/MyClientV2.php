@@ -56,7 +56,8 @@ class MyClientV2 extends SaeTClientV2
 				}
 			}catch(OAuthException $e){
 				var_dump($e);
-				echo $e->xdebug_message;
+				//echo $e->xdebug_message;
+				die();
 			}
 		}
  	}

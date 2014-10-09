@@ -1,10 +1,4 @@
-<div class="row">
-	<?php if( $data['prev'] ){ ?>
-	<div class="col-md-6"><a href="?action=detail&poemId=<?php echo $data['prev']['poemId']?>">上一首</a></div>
-	<?php } if($data['next']){ ?>
-	<div class="col-md-6"><a href="?action=detail&poemId=<?php echo $data['next']['poemId']?>">下一首</a></div>
-	<?php } ?>
-</div>
+
 <div class='theme-1'>
 <?php 
 $audioClass = $data['audio'] ? '' : 'no-audio';
@@ -18,6 +12,17 @@ foreach ($data['content'] as $i => $li) {
 	echo "<li><span>$li</span> <button class='btn btn-default btn-xs btn-audio' data-start='$start' data-end='$end' ><i class='glyphicon glyphicon-volume-down' ></i> </button></li>";
 }
 echo "</ul>";
+?>
+
+<div class="row">
+	<?php if( $data['prev'] ){ ?>
+	<div class="col-md-6"><a href="?action=detail&poemId=<?php echo $data['prev']['poemId']?>">上一首</a></div>
+	<?php } if($data['next']){ ?>
+	<div class="col-md-6"><a href="?action=detail&poemId=<?php echo $data['next']['poemId']?>">下一首</a></div>
+	<?php } ?>
+</div>
+
+<?php
 echo "<hr>";
 foreach (array('note' , 'rhymed' , 'comment') as $key) {
 	echo "<pre>".$data['info'][$key]."</pre>";
@@ -25,6 +30,7 @@ foreach (array('note' , 'rhymed' , 'comment') as $key) {
 }
 $data['info']['url'] = $_SERVER['HTTP_HOST'];
 ?>
+
 </div>
 <script>
 	var audio = "<?php echo $data['audio'] ;?>";
