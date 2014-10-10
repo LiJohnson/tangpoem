@@ -19,11 +19,23 @@ echo "</ul>";
 ?>
 
 <div class="row">
-	<?php if( $data['prev'] ){ ?>
-	<div class="col-md-6"><a href="?action=detail&poemId=<?php echo $data['prev']['poemId']?>">上一首</a></div>
-	<?php } if($data['next']){ ?>
-	<div class="col-md-6"><a href="?action=detail&poemId=<?php echo $data['next']['poemId']?>">下一首</a></div>
-	<?php } ?>
+	<div class="col-md-4">
+		<?php 
+		if( $prev ){
+			echo "<a class='btn btn-warning btn-xs' href='?action=detail&poemId=$prev[poemId]' >上一首</a>";
+		}
+		?>	
+	</div>
+	<div class="col-md-4">
+		<a href="#comment" class="btn btn-warning btn-xs" >评论</a>	
+	</div>
+	<div class="col-md-4">
+		<?php 
+		if( $next ){
+			echo "<a class='btn btn-warning btn-xs' href='?action=detail&poemId=$next[poemId]' >下一首</a>";
+		}
+		?>	
+	</div>
 </div>
 
 <?php
@@ -34,7 +46,7 @@ foreach (array('note' , 'rhymed' , 'comment') as $key) {
 }
 $data['info']['url'] = $_SERVER['HTTP_HOST'];
 ?>
-
+<a href="" id="comment"></a>
 <?php 
 echo $kv->get("comment");
 ?>

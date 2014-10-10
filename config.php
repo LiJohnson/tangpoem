@@ -26,8 +26,8 @@ if( defined('SAE_TMP_PATH') ){
 	define("MY_KV_FILE" , dirname(__file__).'/data.kv');
 
 	//dev
-	//define( "WB_AKEY" , '3600693014' );
-	//define( "WB_SKEY" , '22325d36c32bc46cb553e87afc1b01be' );
+	define( "WB_AKEY" , '3600693014' );
+	define( "WB_SKEY" , '22325d36c32bc46cb553e87afc1b01be' );
 
 	//lcs
 	define( "WB_AKEY" , '1407627537' );

@@ -58,6 +58,8 @@ class MyLogin{
 	public function setDebug( $on = true ){
 		$this->debug = $on ;
 		$this->dao->setDebug($on);
+		//$this->client->set_debug($on);
+
 	}
 	
 	/**

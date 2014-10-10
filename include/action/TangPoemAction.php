@@ -82,6 +82,7 @@ class TangPoemAction extends BaseAction{
 
 	public function wbAuth(){
 		$login = new MyLogin();
+		$login->setDebug();
 		$login->login();
 		$_SESSION['user'] = $login->getUserInfo();
 		header('Location: ' . SITE_URL);
