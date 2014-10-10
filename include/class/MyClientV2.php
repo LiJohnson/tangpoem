@@ -55,8 +55,7 @@ class MyClientV2 extends SaeTClientV2
 					return $token;
 				}
 			}catch(OAuthException $e){
-				var_dump($e);
-				//echo $e->xdebug_message;
+				throw ($e);
 				die();
 			}
 		}

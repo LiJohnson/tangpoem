@@ -1,7 +1,13 @@
 <?php 
+session_start();
 include '../config.php';
 include INCLUDE_PATH . '/function.php';
 include ACTION_PATH . '/AdminAction.php';
+
+
+if( !checkAdmin() ){
+	header("Location: " . SITE_URL);
+}
 
 $page = $_GET['page'] ? $_GET['page'] : ($_GET['action'] ? $_GET['action'] : 'poem');
 $page = preg_replace('/\-/', '_', $page);
@@ -21,6 +27,7 @@ if( is_array($data) ){
 $nav = array(
 	array('page'=> 'poem' , 'title' => '诗'),
 	array('page'=> 'author' , 'title' => '作者'),
+	array('page'=> 'user' , 'title' => '用户'),
 	array('page'=> 'tool' , 'title' => '工具')
 	);
 ?>

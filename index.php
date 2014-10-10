@@ -87,11 +87,16 @@ if($content){
 
 					<ul class="nav navbar-nav navbar-right" >
 						<li class="hide" ><a class="btn btn-default"><i class="glyphicon glyphicon-font"></i></a></li>
-						<li>
-							<a>
-								<?php echo $kv->get("login");?>
-							</a>
-						</li>
+						<?php 
+							$user = getUser();
+
+							if( $user ){
+						?>
+							<li><a href="http://weibo.com/<?=$user[id]?>" target='_blank' ><?=$user[name]?></a></li>
+							<li><a href="?action=logout">退出</a></li>
+						<?php }else{ ?>
+							<li><a href="?action=wbAuth">微博登录</a></li>
+						<?php } ?>
 					</ul>
 					</div>
 			</div>

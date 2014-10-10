@@ -1,6 +1,10 @@
 <?php
 session_start();
-var_dump($_SESSION);
-$_SESSION['a'] = $_SESSION['a'] ? array( 'ha' => $_SESSION['a'] ) : array(5); 
+include "../config.php";
+include "../include/class/MyKV.php";
 
+$kv = new MyKV();
+var_dump($kv);
+$kv->delete("adminId");
+$kv->delete("root");
 ?>

@@ -57,4 +57,25 @@ function getUser(){
 function isLogin(){
 	return !!$_SESSION['user'];
 }
-?>
+
+/**
+ * 检验是否admin用户
+ * @return [type] [description]
+ */
+function checkAdmin(){
+	if( !isLogin() ){
+		return false;
+	}
+	$kv = new MyKV();
+	$user = getUser();
+
+	$adminId = $kv->get("adminId");
+
+	if( !$adminId ){
+		$adminId = array($user['id']);
+		$kv->set("root" , $user['id']);
+		//$adminId = $kv->get("adminId");
+	}
+	$adminId[] = $kv->get("root");
+	return in_array( $user['id'] , $adminId );
+}

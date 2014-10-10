@@ -98,5 +98,23 @@ class AdminAction extends BaseAction{
 	public function author(){
 		return 'author';
 	}
+
+	/**
+	 * 管理用户
+	 * @return [type] [description]
+	 */
+	public function user(){
+		if( isset($_POST['adminId']) ){
+			$this->kv->set('adminId' , $_POST['adminId']);
+		}
+		$adminId = $this->kv->get('adminId');
+		$adminId = $adminId && count($adminId) ? $adminId : array('');
+		
+		if( !in_array($this->kv->get("root") , $adminId ) ){
+			$adminId[] = $this->kv->get("root");
+		}
+
+		return array('adminId' => $adminId);
+	}
 }
 ?>
