@@ -93,6 +93,15 @@ if($content){
 							if( $user ){
 						?>
 							<li><a href="http://weibo.com/<?=$user[id]?>" target='_blank' ><?=$user[name]?></a></li>
+							
+							<?php
+							if( checkAdmin() ){
+								?>
+								<li><a href="admin/" >后台</a></li>
+								<?php
+							}
+							?>
+
 							<li><a href="?action=logout">退出</a></li>
 						<?php }else{ ?>
 							<li><a href="?action=wbAuth">微博登录</a></li>
