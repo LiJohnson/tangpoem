@@ -203,6 +203,7 @@ $(function(){
 			});
 
 			poem.content = poem.content.join("\n");
+			poem.info.audio = poem.info.audio || ("h" + poem.title.substring(0,2) + " " ); 
 			$form.setData(poem).setData(poem.info);
 
 			playerUI.player.set(poem.audio);
