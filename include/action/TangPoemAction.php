@@ -52,6 +52,8 @@ class TangPoemAction extends BaseAction{
 		if( $poem['poemId'] ){
 			$poem['next'] = $this->poemDao->getNext($poem['poemId']);
 			$poem['prev'] = $this->poemDao->getPrev($poem['poemId']);
+		}else{
+			return $this->redirect("?action=info");
 		}
 		return $poem;
 	}
