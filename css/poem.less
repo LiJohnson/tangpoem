@@ -1,4 +1,4 @@
-
+@import "http://5.gelivable.sinaapp.com/css/pre.less";
 /**
  * tangPoem
  */
@@ -31,14 +31,39 @@
 	}
 	
 	&.info{
+		* {
+			.transition(all 1s ease-in-out);
+		}
 		p{
 			color: #333;
 			margin: 15px 0 5px 0;
 			text-indent: 2em;
 			line-height: 24px;
 		}
-		img.img-rounded{
+		.img-rounded{
 			margin-top: 50px;	
+		}
+
+		.ready{
+
+			.title {
+				margin-top:-200px;
+			}
+			.desc-1{
+				margin-top:300px;
+			}
+			.desc-2{
+				margin-top:200px;
+				opacity: 0.5; 
+			}			
+			.desc-3{
+				margin-top:100px;
+				opacity: 0.2;
+			}
+			.img-rounded{
+				margin-left: 100%;
+				opacity: 0.3;
+			}
 		}
 	}
 
