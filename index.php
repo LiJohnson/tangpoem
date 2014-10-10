@@ -57,7 +57,7 @@ if($content){
 	<title><?php echo $title; ?> | 唐诗三百首</title>
 	<?php baseJSCSS(); ?>
 
-	<meta name="keywords" content="唐诗三百首,唐诗,唐诗精选,古诗三百首,唐诗朗读,古诗朗读,在线朗读" />
+	<meta name="keywords" content="唐诗三百首,唐诗,唐诗精选,古诗三百首,唐诗朗读,古诗朗读,在线朗读,分句朗读,续句,朗读" />
 	<meta name="description" content="<?php echo $description;?>" />
 
 </head>
