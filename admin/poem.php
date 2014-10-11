@@ -165,7 +165,11 @@ $form = array(
 						保存
 					</a>
 				</li>
-
+				<li class="list-group-item">
+					<a href="javascript:;" class="btn btn-default next">
+						next
+					</a>
+				</li>
 			</ul>
 		</div>
 	</div>
@@ -191,8 +195,8 @@ $(function(){
 		});
 	};
 
-	var loadPoem = function(id){
-		$.post("?action=loadPoem&ajax=1",{poemId:id},function(poem){
+	var loadPoem = function(id,next){
+		$.post("?action=loadPoem&ajax=1",{poemId:id,next:next},function(poem){
 			poem.info.audioIndex = poem.info.audioIndex || [];
 			$poemAudio.empty( );
 			$.each(poem.content, function(index, li) {
@@ -299,6 +303,10 @@ $(function(){
 		upload(this.files[0]);
 	});
 
+	$(".btn.next").click(function(event) {
+		loadPoem( $form.find("input[name=poemId]").val() , 1 );
+	});
+
 	loadPoemList();
 	$("body").append(playerUI.$player);
 	playerUI.$player.drag({handle:".control"}).css("position","fixed");
@@ -316,12 +324,19 @@ $(function(){
 	$(function(){
 		var $tool = $(".format-tool");
 		var $textarea = false;
+		var history = [];
 
 		$(document).on("focus","textarea",function(){
 			$textarea = $(this);
 		});
 
-		$tool.on("click",".preview",function(){
+		$tool.on("click",".space,.replace,.split",function(){
+			var data = [];
+			$("textarea").each(function(){
+				data.push( [this,$(this).val()] );
+			});
+			history.push(data);
+		}).on("click",".preview",function(){
 			window.open("<?php echo SITE_URL ?>?action=detail&poemId=" +$("input[name=poemId]").val(),"_blank");
 		}).on("click",".space",function(){
 			var text = $textarea.val().replace(/\n/g,"##");
@@ -344,7 +359,11 @@ $(function(){
 				}
 			}
 		}).on("click",".reset",function(){
-			location.reload();
+			var data = history.pop();
+			if( !data )return;
+			$.each(data,function(){
+				this[0].value = this[1];
+			});
 		}).on("click" , ".save" , function(){
 			$("form[name=poem]").trigger('submit');
 		});

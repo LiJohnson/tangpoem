@@ -67,7 +67,9 @@ class AdminAction extends BaseAction{
 	 * @return [type] [description]
 	 */
 	public function loadPoem(){
-		return $this->poemDao->getById($_POST['poemId'] ? $_POST['poemId'] : $_GET['poemId'] );
+		$id = $_POST['poemId'] ? $_POST['poemId'] : $_GET['poemId'];
+
+		return $_POST['next'] ? $this->poemDao->getNext( $id ) : $this->poemDao->getById( $id );
 	}
 
 	/**
