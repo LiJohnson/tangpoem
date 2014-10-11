@@ -102,9 +102,7 @@ $form = array(
 				}
 				?>
 				<div class="form-group has-feedback">
-					<label class="col-sm-1">
-						上传 
-					</label>
+					<label class="col-sm-1">上传</label>
 					<div class=" col-sm-10">
 						<input type=file name=file />
 					</div>
@@ -195,7 +193,7 @@ $(function(){
 		});
 	};
 
-	var loadPoem = function(id,next){
+	var loadPoem = function(id,next,cb){
 		$.post("?action=loadPoem&ajax=1",{poemId:id,next:next},function(poem){
 			poem.info.audioIndex = poem.info.audioIndex || [];
 			$poemAudio.empty( );
@@ -210,10 +208,16 @@ $(function(){
 			poem.audio = poem.audio || ("h" + poem.title.substring(0,2) + " " ); 
 			$form.setData(poem).setData(poem.info);
 
+			cb && cb();
+
 			playerUI.player.set(poem.audio);
 
 			updateUrl(poem.poemId);
 		});
+	};
+
+	var loadNext = function(cb){
+		loadPoem( $("input[name=poemId]").val() , "next" , cb);
 	};
 
 	var upload = function(file){
@@ -235,6 +239,27 @@ $(function(){
 			}
 		}
 		history.pushState({},0,url);
+	};
+
+	var submit = function(cb){
+		$form.postData("?action=updatePoem",function(data){
+			if( data.result ){
+				if( cb )return cb();
+
+				$.alertMessage("修改成功");
+				loadPoem(data.poemId);
+			}else{
+				$.box("修改失败");
+			}
+		});
+	};
+	window.shit = function(){
+		autoFormat();
+		submit(function(){
+			loadNext(function(){
+				shit();
+			});
+		});
 	};
 
 	$(".left form select").change(function(){
@@ -268,14 +293,7 @@ $(function(){
 	});
 
 	$form.submit(function(event) {
-		$form.postData("?action=updatePoem",function(data){
-			if( data.result ){
-				$.alertMessage("修改成功");
-				loadPoem(data.poemId);
-			}else{
-				$.box("修改失败");
-			}
-		});
+		submit();
 		return false;
 	}).on("click" , ".player" , function(){
 		
@@ -314,7 +332,7 @@ $(function(){
 
 	<?php
 	if( $_GET['poemId'] ){
-		echo "loadPoem($_GET[poemId])";
+		echo "loadPoem($_GET[poemId],void 0 )";
 	}
 	?>
 });
@@ -330,6 +348,32 @@ $(function(){
 			$textarea = $(this);
 		});
 
+		var format = {
+			space:function($textarea){
+				var text = $textarea.val().replace(/\n/g,"##");
+				$textarea.val(text.replace(/\s+/g,"").replace(/##/g,"\n"));
+			},
+			replace:function($textarea){
+				var text = $textarea.val().replace(/\n/g,"##");
+				$textarea.val(text.replace(/\s+/g,"\n").replace(/##/g,"\n"));
+			},
+			split:function($textarea){
+				var text = $textarea.val().split("【");
+				while( text.length ){
+					var t = text.pop();
+					if( t.indexOf("注解") == 0){
+						$("form[name=poem] textarea[name=note]").val("【" + t);
+					}else if( t.indexOf("韵译") == 0){
+						$("form[name=poem] textarea[name=rhymed]").val("【" + t);
+					}else if( t.indexOf("评析") == 0){
+						$("form[name=poem] textarea[name=comment]").val("【" + t);
+					}else{
+						$("form[name=poem] textarea[name=content]").val(t.replace(/\s+/,"\n"));
+					}
+				}
+			}
+		};
+
 		$tool.on("click",".space,.replace,.split",function(){
 			var data = [];
 			$("textarea").each(function(){
@@ -338,26 +382,6 @@ $(function(){
 			history.push(data);
 		}).on("click",".preview",function(){
 			window.open("<?php echo SITE_URL ?>?action=detail&poemId=" +$("input[name=poemId]").val(),"_blank");
-		}).on("click",".space",function(){
-			var text = $textarea.val().replace(/\n/g,"##");
-			$textarea.val(text.replace(/\s+/g,"").replace(/##/g,"\n"));
-		}).on("click",".replace",function(){
-			var text = $textarea.val().replace(/\n/g,"##");
-			$textarea.val(text.replace(/\s+/g,"\n").replace(/##/g,"\n"));
-		}).on("click",".split",function(){
-			var text = $textarea.val().split("【");
-			while( text.length ){
-				var t = text.pop();
-				if( t.indexOf("注解") == 0){
-					$("form[name=poem] textarea[name=note]").val("【" + t);
-				}else if( t.indexOf("韵译") == 0){
-					$("form[name=poem] textarea[name=rhymed]").val("【" + t);
-				}else if( t.indexOf("评析") == 0){
-					$("form[name=poem] textarea[name=comment]").val("【" + t);
-				}else{
-					$("form[name=poem] textarea[name=content]").val(t.replace(/\s+/,"\n"));
-				}
-			}
 		}).on("click",".reset",function(){
 			var data = history.pop();
 			if( !data )return;
@@ -367,6 +391,32 @@ $(function(){
 		}).on("click" , ".save" , function(){
 			$("form[name=poem]").trigger('submit');
 		});
+
+		$.each(format,function(k,fun){
+			$tool.on("click","."+k,function(){
+				fun($textarea);
+			});
+		});
+		
+		window.autoFormat = (function(){
+		var $content = $("textarea[name=content]") , $rhymed = $("textarea[name=rhymed]") , $note = $("textarea[name=note]") , $comment = $("textarea[name=comment]");
+			return function(){
+				if( ($note.val().match(/【/g)||[]).length == 3 ){
+					format.split($note);
+					$content.val( $content.val().replace(/[\s\S]+作者\S+\s+/,'').replace(/\n?$/,''));
+					format.replace($content);
+					format.replace($rhymed);
+				}
+				format.space($rhymed);
+				format.replace($note);
+				format.space($comment);
+
+				$.each([$rhymed , $note , $comment],function(){
+					var $this = $(this);
+					$this.val($this.val().replace(/】：\n?/,"】：\n"));
+				})
+			}
+		})();
 	});
 </script>
 
