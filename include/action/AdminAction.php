@@ -7,7 +7,7 @@ include DAO_PATH . '/AuthorDao.php';
 
 /**
  * @author lcs
- * @date 2014-09-19
+ * @since 2014-09-19
  * @desc 后台action
  */
 class AdminAction extends BaseAction{
@@ -54,23 +54,41 @@ class AdminAction extends BaseAction{
 		return $keys;
 	}
 
-
+	/**
+	 * 获取诗歌列表,可通过关键字和类型过滤
+	 * @return [type] [description]
+	 */
 	public function loadPoemList(){
 		return $this->poemDao->getAll($_POST['key'] , $_POST['type']);
 	}
 
+	/**
+	 * 通过Id,加载一首诗
+	 * @return [type] [description]
+	 */
 	public function loadPoem(){
 		return $this->poemDao->getById($_POST['poemId'] ? $_POST['poemId'] : $_GET['poemId'] );
 	}
 
+	/**
+	 * 添加一首诗
+	 */
 	public function addPoem(){
 		return $this->poemDao->addPoem();
 	}
 
+	/**
+	 * 更新
+	 * @return [type] [description]
+	 */
 	public function updatePoem(){
 		return array('result' => $this->poemDao->updatePoem($_POST) , 'poemId' => $_POST['poemId']);
 	}
 
+	/**
+	 * 删除
+	 * @return [type] [description]
+	 */
 	public function deletePoem(){
 		return $this->poemDao->delete('poemId = ' . $_POST['poemId']);
 	}
@@ -95,6 +113,10 @@ class AdminAction extends BaseAction{
 		return false;
 	}
 
+	/**
+	 * 作者页面
+	 * @return [type] [description]
+	 */
 	public function author(){
 		return 'author';
 	}

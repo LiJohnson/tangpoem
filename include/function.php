@@ -1,4 +1,14 @@
 <?php
+/**
+ * @author lcs 
+ * @since 2014-10-11
+ * @desc  一些工具方法
+ */
+
+/**
+ * 公共的js和css
+ * @return void
+ */
 function baseJSCSS(){
 	?>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">

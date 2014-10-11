@@ -8,7 +8,7 @@ include DAO_PATH . '/AuthorDao.php';
 include CLASS_PATH . '/MyLogin.php';
 /**
  * @author lcs
- * @date 2014-09-20
+ * @since 2014-09-20
  * @desc 网站前台action
  */
 class TangPoemAction extends BaseAction{
@@ -22,7 +22,7 @@ class TangPoemAction extends BaseAction{
 	}
 
 	/**
-	 * [index description]
+	 * 简介页面
 	 * @return [type] [description]
 	 */
 	public function info( $data ){
@@ -59,7 +59,7 @@ class TangPoemAction extends BaseAction{
 	}
 
 	/**
-	 * [index description]
+	 * 关于页面
 	 * @return [type] [description]
 	 */
 	public function about(){
@@ -67,7 +67,7 @@ class TangPoemAction extends BaseAction{
 	}
 
 	/**
-	 * [index description]
+	 * 经典页面
 	 * @return [type] [description]
 	 */
 	public function classic(){
@@ -75,26 +75,32 @@ class TangPoemAction extends BaseAction{
 	}
 
 	/**
-	 * [index description]
+	 * 测验页面
 	 * @return [type] [description]
 	 */
 	public function test(){
 		return array('page' => 'about');
 	}
 
+	/**
+	 * 微博授权
+	 * @return [type] [description]
+	 */
 	public function wbAuth(){
 		$login = new MyLogin();
 		$login->setDebug();
 		$login->login();
 		$_SESSION['user'] = $login->getUserInfo();
-		header('Location: ' . SITE_URL);
-		die();
+		return $this->redirect(SITE_URL);
 	}
 
+	/**
+	 * 退出
+	 * @return [type] [description]
+	 */
 	public function logout(){
 		$login = new MyLogin();
 		$login->logout();
-		header('Location: ' . SITE_URL);
-		die();
+		return $this->redirect(SITE_URL);
 	}
 }

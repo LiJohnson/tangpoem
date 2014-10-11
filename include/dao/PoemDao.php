@@ -1,7 +1,7 @@
 <?php
 /**
  * @author lcs
- * @date 2014-09-19
+ * @since 2014-09-19
  * @desc 诗Dao
  */
 class PoemDao extends BaseDao{
@@ -38,6 +38,11 @@ class PoemDao extends BaseDao{
 		return $list;
 	}
 
+	/**
+	 * 获取诗歌类型
+	 * @param  boolean $type 类型
+	 * @return array        	
+	 */
 	public function getAllType( $type = false ){
 		$where = '';
 		if( $type ){
@@ -46,6 +51,12 @@ class PoemDao extends BaseDao{
 		return $this->getData("SELECT type FROM poem  $where GROUP BY type");
 	}
 
+	/**
+	 * 查找诗歌
+	 * @param  boolean $key  关键字,可为诗句,标题,作者
+	 * @param  boolean $type 类型
+	 * @return array
+	 */
 	public function getAll( $key = false , $type = false ){
 		$sql = $this->selectSql;
 		if( $key ){
@@ -59,8 +70,9 @@ class PoemDao extends BaseDao{
 
 	/**
 	 * 获取一首诗
-	 * @param  [type] $id [description]
-	 * @return [type]     [description]
+	 * @param  int $id id
+	 * @param  string $cur 'next':获取$id的下一首,'prev':获取$id的上一首
+	 * @return 
 	 */
 	public function getById( $id , $cur = false ){
 		$sql = "SELECT poem.* , author.name FROM poem LEFT JOIN author ON poem.authorId = author.authorId WHERE ";
@@ -78,7 +90,7 @@ class PoemDao extends BaseDao{
 
 	/**
 	 * 获取下一首诗
-	 * @param  [type] $id [description]
+	 * @param  int $id
 	 * @return [type]     [description]
 	 */
 	public function getNext( $id ){
@@ -94,6 +106,9 @@ class PoemDao extends BaseDao{
 		return $this->getById($id , 'prev');
 	}
 
+	/**
+	 * 添加一首诗
+	 */
 	public function addPoem(){
 		return $this->save(array(
 			'title' => ' new one',
@@ -101,6 +116,11 @@ class PoemDao extends BaseDao{
 			),'poemId');
 	}
 
+	/**
+	 * 更新一首诗
+	 * @param  array $param 
+	 * @return [type]        
+	 */
 	public function updatePoem($param){
 		if( !$this->getById($param['poemId']) )return false;
 
@@ -119,7 +139,15 @@ class PoemDao extends BaseDao{
 			), 'poemId = ' . $param['poemId']);	
 	}
 
-	public function searchPoem( $author , $type , $key , $groupBy = 'name'){
+	/**
+	 * 查找
+	 * @param  string $author  作者
+	 * @param  string $type    类型
+	 * @param  string $key     关键字,可为诗句,标题,作者	
+	 * @param  string $orderBy 排序
+	 * @return array
+	 */
+	public function searchPoem( $author , $type , $key , $orderBy = 'name'){
 		$sql = $this->selectSql;
 		if( $author ){
 			$sql .= " AND author.name LIKE '". $author . "'";
@@ -131,7 +159,8 @@ class PoemDao extends BaseDao{
 			$sql .= " AND (poem.title LIKE '%". $key ."%' OR author.name LIKE '%".$key."%' OR poem.content LIKE '%".$key."%' ) " ;
 		}
 
-		$sql .= ' ORDER BY CONVERT('.$groupBy.' USING GBK) ';
+		$sql .= ' ORDER BY CONVERT('.$orderBy.' USING GBK) ';
+		
 		return $this->unserPoem($this->getData($sql));
 	}
 }

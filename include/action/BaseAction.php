@@ -1,4 +1,9 @@
-<?php 
+<?php
+/**
+ * @author lcs 
+ * @since  2014-10-11
+ * @desc action父类
+ */
 class BaseAction{
 
 	/**
