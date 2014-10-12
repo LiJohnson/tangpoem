@@ -102,7 +102,7 @@ $form = array(
 				}
 				?>
 				<div class="form-group has-feedback">
-					<label class="col-sm-1">上传</label>
+					<label class="col-sm-1 control-label">上传</label>
 					<div class=" col-sm-10">
 						<input type=file name=file />
 					</div>
@@ -433,4 +433,32 @@ $(function(){
 			tpl: "<li data-value='http://theotherdoor-wp.stor.sinaapp.com/tangpoem-audio/${href}'>${name}</li>"
 		});
 	})();
+</script>
+
+//音频
+<script>
+	$(document).on('blur' , 'input[type=number]' , function(){
+		var $this = $(this);
+		var $input = $('input[type=number]');
+		var index = $input.index($this);
+
+		if(index < 1)return;
+
+		var last = $this.val()*1;
+		var step = last - $input.eq(index-1).val();
+
+		$input.filter(":gt("+ index +")").each(function(){
+			if( this.value )return false;
+			this.value = (last = last + step).toFixed(3);
+		});
+	}).on('click','input[type=number]',function(e){
+		if( e.originalEvent.detail < 3 )return;
+		var $input = $('input[type=number]')
+		var index = $input.index($(this))+1;
+		$input.filter(":gt("+index+")").val("");
+	}).on("focus",'input[type=number]' , function(){
+		$(this).prop("step","0.1");
+	}).on("blur",'input[type=number]' ,function(){
+		$(this).prop("step","0.001");
+	});
 </script>
