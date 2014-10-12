@@ -6,8 +6,9 @@ define("CLASS_PATH" , INCLUDE_PATH . '/class');
 define("DAO_PATH" , INCLUDE_PATH . '/dao');
 define("ACTION_PATH" , INCLUDE_PATH . '/action');
 define("UPLOAD_PATH" , BASE_PATH . '/upload');
+define("IS_LOCAL" , !defined('SAE_TMP_PATH') );
 
-if( defined('SAE_TMP_PATH') ){
+if( !IS_LOCAL ){
 	define("SITE_URL" , 'http://webbm.sinaapp.com');
 	define("MY_DB_NAME" , false);
 	//webbm

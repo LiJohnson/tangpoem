@@ -116,5 +116,8 @@ if($content){
 	<div class="container">
 		<?php include BASE_PATH . "/$page.php";  // var_dump($_SESSION); ?>
 	</div>
+	<?php
+		googleAnalytics();
+	?>
 </body>
 </html>
