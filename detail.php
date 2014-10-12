@@ -1,7 +1,7 @@
 
 <div class='theme-1'>
 <?php 
-$audioClass = $data['audio'] ? '' : 'no-audio';
+$audioClass =  preg_match('/^http/', $data['audio']) ? '' : 'no-audio';
 
 echo "<h1 class='$audioClass' ><span class='play-all btn-audio'><i class='glyphicon glyphicon-volume-down' ></i></span>$data[title]<small>$data[name]</small></h1>";
 
