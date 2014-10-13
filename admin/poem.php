@@ -242,6 +242,9 @@ $(function(){
 	};
 
 	var submit = function(cb){
+		$form.find("textarea").each(function(){
+			$(this).val($(this).val().replace(/\n*$/,''));
+		});
 		$form.postData("?action=updatePoem",function(data){
 			if( data.result ){
 				if( cb )return cb();
