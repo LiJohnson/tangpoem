@@ -22,12 +22,11 @@ function baseJSCSS(){
 	<script>$.box = $.box3 || $.box;</script>
 	
 
-	<link rel="shutcut icon" href="<?php echo SITE_URL;?>/img/T.png"/>
-
-	<link rel="stylesheet" href="<?php echo SITE_URL;?>/css/poem.css"/>
-	<link rel="stylesheet" href="<?php echo SITE_URL;?>/css/myPlayer.css"/>
-	<script src="<?php echo SITE_URL;?>/js/myPlayer.js" ></script>
-	<script src="<?php echo SITE_URL;?>/js/poem.js" ></script>
+	<link rel="shutcut icon" href="<?php resource('/img/T.png');?>"/>
+	<link rel="stylesheet"   href="<?php resource('/css/poem.css'); ?>"/>
+	<link rel="stylesheet"   href="<?php resource('/css/myPlayer.css'); ?>"/>
+	<script src="<?php resource('/js/myPlayer.js'); ?>" ></script>
+	<script src="<?php resource('/js/poem.js'); ?>" ></script>
 	<?php
 }
 
@@ -108,4 +107,13 @@ function googleAnalytics(){
 
 	</script>
 	<?php
+}
+
+/**
+ * 输出一个资源的URL
+ * @param  [type] $item [description]
+ * @return [type]       [description]
+ */
+function resource( $item ){
+	echo SITE_URL . $item;
 }

@@ -2,6 +2,7 @@
 
 include dirname(__file__).'/../config.php';
 include dirname(__file__).'/WeiXinV2.php';
+include INCLUDE_PATH . "/function.php";
 include CLASS_PATH . "/MyKV.php";
 //include CLASS_PATH . "/MyCurl.php";
 
@@ -35,26 +36,12 @@ $w->on('text',function($postData){
 })->onPushEven( 'unsubscribe' , function($postData){
 	return "就这样，走好";
 } )->onNormalMessage(function( $postData ){
-	
 	return array('Content' => $postData->MsgType . ' => ' . $postData->Content .' => '. time());
 });
-/*
-$log = array();
-
-if( $message = $w->receiveMessage() ){
-	$tmp = $message['ToUserName'];
-	$message['ToUserName'] = $message['FromUserName'] ;
-	$message['FromUserName'] = $tmp;
-	$message['Content'] = '\(^o^)/';
-	$tmp = $w->reply($message);
-	echo $tmp;
-    $w->log(array($tmp,$message,$GLOBALS));
-
-}else {
-	
-}
-*/
-
-echo "<h1 style='text-align: center;margin-top: 10%;' >HI WEIXIN</h1>";
-
+?>
+<title>
+	WEI XIN
+</title>
+<h1 style='text-align: center;margin-top: 10%;' >HI WEIXIN</h1>
+<img src="<?php resource('/img/8cm.jpg');?>" style="display: block;margin: 0px auto;" />
 
