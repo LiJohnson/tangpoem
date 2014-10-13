@@ -48,7 +48,7 @@ $data['info']['url'] = $_SERVER['HTTP_HOST'];
 ?>
 <a href="" id="comment"></a>
 <?php 
-echo $kv->get("comment");
+echo preg_replace('/url=\S+/', 'url="'.getPoemURL($data['poemId']).'"', $kv->get("comment"));
 ?>
 
 </div>

@@ -15,7 +15,7 @@ class AuthorDao extends BaseDao{
 	 * @return [type] [description]
 	 */
 	public function getAll(){
-		return $this->getModelList(array() , 'ORDER BY CONVERT(name using gbk)');
+		return $this->search(null);
 	}
 
 	/**
@@ -25,6 +25,15 @@ class AuthorDao extends BaseDao{
 	 */
 	public function getByName($name){
 		return $this->getOne(array('name' => $name));
+	}
+
+	/**
+	 * 查找
+	 * @param  [type] $name [description]
+	 * @return [type]       [description]
+	 */
+	public function searchAuthor($name){
+		return $this->getModelList(array( 'name' => ( $name ? '%'.$name.'%' : null) ) , 'ORDER BY CONVERT(name using gbk)');
 	}
 }
 ?>

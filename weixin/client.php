@@ -7,7 +7,6 @@ include CLASS_PATH . "/MyKV.php";
 include ACTION_PATH  . '/WeiXinAction.php';
 
 header("Content-Type:text/html; charset=utf-8");
-//include CLASS_PATH . "/MyCurl.php";
 
 $weixinAction = new WeiXinAction();
 
@@ -35,13 +34,9 @@ $w = new WeiXinClient(""/*TOKEN*/);
 $w->valid($_GET);
 
 $w->on('text',function($postData) use($weixinAction){
-	$poem = $weixinAction->textMessage($postData->Content);
-	$content = array("【$poem[title] --$poem[name]】");
-	$content[] = join($poem['content'],"\n");
-	$content[] = "<a href='".getPoemURL($poem['poemId'])."' >详情</a>";
-	return join($content , "\n");
+	return $weixinAction->textMessage($postData->Content);
 })->onPushEven( 'subscribe' ,function($postData){
-	return '欢迎关注<a href="http://webbm.sinaapp.com/" >唐诗三百首</a>，俗话说：“熟读唐诗三百首，不会作诗也会吟。”,我们将为您提供唐诗原文，朗读，翻译，赏析等报务;<a href="http://webbm.sinaapp.com/?action=cate" >更多请到</a>';
+	return '欢迎关注<a href="http://webbm.sinaapp.com/" >唐诗三百首</a>，俗话说：“熟读唐诗三百首，不会作诗也会吟。”,我们将为您提供唐诗原文，朗读，翻译，赏析等报务;' . "\n\n" . $weixinAction->textMessage('help');
 })->onPushEven( 'unsubscribe' , function($postData){
 	return "就这样，走好";
 } )->onNormalMessage(function( $postData ){

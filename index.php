@@ -55,12 +55,13 @@ if($content){
 <html lang="en" xmlns:wb="http://open.weibo.com/wb">
 <head>
 	<meta charset="UTF-8">
-	<title><?php echo $title; ?> | 唐诗三百首</title>
-	<?php baseJSCSS(); ?>
-
 	<meta name="keywords" content="唐诗三百首,唐诗,唐诗精选,古诗三百首,唐诗朗读,古诗朗读,在线朗读,分句朗读,续句朗读" />
 	<meta name="description" content="<?php echo $description;?>" />
 
+	<title><?php echo $title; ?> | 唐诗三百首</title>
+	<?php baseJSCSS(); ?>
+	<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=713047838" type="text/javascript" charset="utf-8"></script>
+	
 </head>
 <body id="tang-poem" class="<?php echo $action; ?>" >
 	<header>
