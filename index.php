@@ -30,7 +30,7 @@ $nav = array(
 	array('action'=> 'cate' , 'title' => '目录'),
 	array('action' => 'about' , 'title' => '关于'),
 	array('action' => 'classic' , 'title' => '经典'),
-	array('action' => 'test' , 'title' => '测验')
+	array('action' => 'weixin' , 'title' => '微信')
 );
 
 foreach ($nav as $item) {

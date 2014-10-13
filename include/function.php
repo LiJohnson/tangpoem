@@ -117,3 +117,7 @@ function googleAnalytics(){
 function resource( $item ){
 	echo SITE_URL . $item;
 }
+
+function getPoemURL($id){
+	return SITE_URL . "/?action=detail&poemId=" . $id;
+}

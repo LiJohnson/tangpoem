@@ -163,5 +163,13 @@ class PoemDao extends BaseDao{
 		
 		return $this->unserPoem($this->getData($sql));
 	}
+
+	/**
+	 * 随机返回一首诗
+	 * @return [type]      [description]
+	 */
+	public function getRand(){
+		return $this->unserPoem($this->getLine( $this->selectSql . " ORDER BY rand()"));
+	}
 }
 ?>

@@ -75,11 +75,11 @@ class TangPoemAction extends BaseAction{
 	}
 
 	/**
-	 * 测验页面
+	 * 微信页面
 	 * @return [type] [description]
 	 */
-	public function test(){
-		return array('page' => 'about');
+	public function weixin(){
+		return array('page' => 'weixin/page');
 	}
 
 	/**
