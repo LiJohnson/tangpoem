@@ -5,12 +5,12 @@
  * @since 2014-10-12
  * 微信API
  */
-class WeiXinV2{
+class WeiXinClient{
 	private $token;
 	private $appId;
 	private $appSecret;
 
-	public function WeiXinV2( $token , $appId = null , $appSecret = null ){
+	public function WeiXinClient( $token , $appId = null , $appSecret = null ){
 		$this->token = $token;
 		$this->appId = $appId;
 		$this->appSecret = $appSecret;
@@ -31,8 +31,7 @@ class WeiXinV2{
 		sort($tmp , SORT_STRING);
 		$tmp = implode( $tmp );
 		$tmp = sha1( $tmp );
-
-		echo $tmp ==  $data['signature'] ? $data['echostr'] : false;
+		echo $tmp ==  $data['signature'] ? $data['echostr'] : 'false';
 		exit;
 	}
 
