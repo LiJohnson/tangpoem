@@ -3,7 +3,9 @@
  * tangPoem
  */
 #tang-poem{
+	@fontFamily: '微软雅黑', "Microsoft Yahei" , '黑体','Helvetica Neue', Helvetica, Arial, sans-serif;
 	padding-top: 70px;
+	font-family: @fontFamily;
 	.nav.navbar-left{
 		>li>a{
 			padding-left: 40px;
@@ -111,17 +113,18 @@
 		}
 	}
 	.theme-1{
-		font-family: Monaco, "Microsoft Yahei", Tahoma, sans-serif;
+		font-family: Monaco,@fontFamily;
 		.poem-content{
 			font-size: 25px;	
 		}
 		pre{
+			font-family: Monaco,@fontFamily;
 			font-size: 20px;
 		}
 	}
 	
 	.about{
-		font-family:'微软雅黑', '黑体', sans-serif;
+		
 		font-size: 15px;
 		.form{
 			margin-top: 5%;

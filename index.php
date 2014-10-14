@@ -127,8 +127,9 @@ if($content){
 		</div>
 		<div class="form-group">
 			<label class="control-label" for="content">内容</label>
-			<textarea class="form-control" check-len="1" name="content" id="content" placeholder="意见反馈内容" rows="5" ></textarea>
+			<textarea class="form-control" check-len="1" name="content" id="content" placeholder="建议/反馈内容" rows="5" ></textarea>
 		</div>
 	</form>
+	<?php include 'footer.php'; ?>
 </body>
 </html>

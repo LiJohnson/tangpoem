@@ -3,7 +3,7 @@ $groupBy = $data['groupBy'];
 ?>
 <div class="row">
 	
-	<form class="form-inline" action="?action=cate" role="form" >
+	<form class="form-inline cate" action="?action=cate" role="form" >
 		<div class="col-md-4" >
 			<div class="btn-group" data-toggle="buttons">
 				<label class="btn btn-primary <?php echo $data['groupByType'] ;?>">
@@ -61,7 +61,7 @@ $groupBy = $data['groupBy'];
 </div>
 
 <script>
-	$("form").on("change" , "input[type=radio]",function(){
-		$("form").submit();
+	$("form.cate").on("change" , "input[type=radio]",function(){
+		$("form.cate").submit();
 	});
 </script>
