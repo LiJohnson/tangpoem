@@ -15,7 +15,7 @@ class AuthorDao extends BaseDao{
 	 * @return [type] [description]
 	 */
 	public function getAll(){
-		return $this->search(null);
+		return $this->searchAuthor(null);
 	}
 
 	/**
