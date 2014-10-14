@@ -29,7 +29,7 @@ $nav = array(
 	array('action'=> 'info' , 'title' => '简介'),
 	array('action'=> 'cate' , 'title' => '目录'),
 	array('action' => 'about' , 'title' => '关于'),
-	array('action' => 'classic' , 'title' => '经典'),
+	//array('action' => 'classic' , 'title' => '经典'),
 	array('action' => 'weixin' , 'title' => '微信')
 );
 
@@ -63,7 +63,7 @@ if($content){
 	<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=713047838" type="text/javascript" charset="utf-8"></script>
 	
 </head>
-<body id="tang-poem" class="<?php echo $action; ?>" >
+<body id="tang-poem"  >
 	<header>
 		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 			<div class="container">
@@ -114,11 +114,21 @@ if($content){
 		</nav>
 	</header>
 
-	<div class="container">
+	<div class="container <?php echo $action; ?>" >
 		<?php include BASE_PATH . "/$page.php";  // var_dump($_SESSION); ?>
 	</div>
 	<?php
 		googleAnalytics();
 	?>
+	<form class="hide feedback" role="form">
+		<div class="form-group">
+			<label class="control-label" for="email">邮箱</label>
+			<input type="email" check-type="email" name="email" class="form-control" id="email" placeholder="联系邮箱">
+		</div>
+		<div class="form-group">
+			<label class="control-label" for="content">内容</label>
+			<textarea class="form-control" check-len="1" name="content" id="content" placeholder="意见反馈内容" rows="5" ></textarea>
+		</div>
+	</form>
 </body>
 </html>

@@ -83,6 +83,18 @@ class TangPoemAction extends BaseAction{
 	}
 
 	/**
+	 * 意见反馈
+	 * @return [type] [description]
+	 */
+	public function feedback(){
+		$res = false;
+		if( $_POST['email'] && $_POST['content'] ){
+			$res = sendMail($_POST['email'] , $_POST['content']);
+		}
+		return array('result' => $res);
+	}
+
+	/**
 	 * 微博授权
 	 * @return [type] [description]
 	 */

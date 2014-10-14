@@ -36,7 +36,7 @@ $w->valid($_GET);
 $w->on('text',function($postData) use($weixinAction){
 	return $weixinAction->textMessage($postData->Content);
 })->onPushEven( 'subscribe' ,function($postData){
-	return '欢迎关注<a href="http://webbm.sinaapp.com/" >唐诗三百首</a>，俗话说：“熟读唐诗三百首，不会作诗也会吟。”,我们将为您提供唐诗原文，朗读，翻译，赏析等报务;' . "\n\n" . $weixinAction->textMessage('help');
+	return '欢迎关注<a href="http://webbm.sinaapp.com/" >唐诗三百首</a>，俗话说：“熟读唐诗三百首，不会作诗也会吟。”,我们将为您提供唐诗原文，朗读，翻译，赏析等服务;' . "\n\n" . $weixinAction->textMessage('help');
 })->onPushEven( 'unsubscribe' , function($postData){
 	return "就这样，走好";
 } )->onNormalMessage(function( $postData ){

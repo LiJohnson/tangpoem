@@ -127,7 +127,7 @@ class WeiXinClient{
 		$message['FromUserName'] = $postData->ToUserName;
 		$message['CreateTime'] = time();
 		$message['MsgType'] = 'text';
-		$message['Content'] = '汪 汪 汪';
+		//$message['Content'] = '汪 汪 汪';
 		echo $this->arrayToXml( array_merge($message ,$replyData ) );
 	}
 

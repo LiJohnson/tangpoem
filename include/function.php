@@ -28,6 +28,7 @@ function baseJSCSS(){
 	<script src="<?php resource('/js/myPlayer.js'); ?>" ></script>
 	<script src="<?php resource('/js/poem.js'); ?>" ></script>
 	<?php
+	echo '<script>window.siteUrl = "'. SITE_URL .'";</script>';
 }
 
 /**
@@ -120,4 +121,34 @@ function resource( $item ){
 
 function getPoemURL($id){
 	return SITE_URL . "/?action=detail&poemId=" . $id;
+}
+
+/**
+ * 发送邮件
+ * @param  [type] $title [description]
+ * @param  [type] $body  [description]
+ * @return [type]        [description]
+ */
+function sendMail($from , $body){
+	//c20524f14
+	require INCLUDE_PATH . "/PHPMailer/PHPMailerAutoload.php";
+
+	$mail = new PHPMailer();
+	$mail->SMTPDebug = 2;
+	$mail->isSMTP();
+	$mail->Host = 'smtp.163.com';
+	$mail->Port = 25;
+	$mail->SMTPAuth = true;
+	$mail->CharSet = 'utf-8';
+
+	$mail->Username = 'c20524f14@163.com';
+	$mail->Password = 'ac20524f14';
+	$mail->setFrom('c20524f14@163.com', 'tangPoem');
+
+	$mail->addAddress('598420668@163.com', 'ahah');
+
+	$mail->Subject = '意见反馈【唐诗三百首】';
+	$mail->Body = $body . "\r\nfrom " . $from ;
+	var_dump($mail);
+	return $mail->send();
 }

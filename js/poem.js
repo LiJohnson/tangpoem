@@ -47,3 +47,23 @@
 		this.pause();
 	}
 })();
+
+$(function(){
+	$(document).on("click","[click-feedback]",function(){
+		var $form =  $("form.feedback").clone().removeClass('hide');
+		$.box({
+			title:"意见反馈",
+			html:$form,
+			ok:function(){
+				if( !$form.check(function($input,result){
+					$input.parents(".form-group").toggleClass('has-error',!result);
+					return false;
+				}))return false;
+				$form.postData(siteUrl+"/?action=feedback",function(data){
+					$.box("<h2 style='text-align=center' >THX!</h2>");
+				});
+			},
+			cancel:function(){}
+		});
+	});
+});
