@@ -39,7 +39,7 @@ $groupBy = $data['groupBy'];
 	<div class="col-md-12">
 		<div class="row">
 		<?php 
-		
+
 		if ( count($data['poems']) ){
 			$groups = array();			
 			foreach ($data['poems'] as $poem) {
@@ -48,7 +48,7 @@ $groupBy = $data['groupBy'];
 					$groups[] = $group;
 					echo "</div>";
 					echo "<div class='row'>";
-					echo "<div class='col-md-12'><h4><a href='?action=cate&$groupBy=$group' >$group</a></h4><hr></div>";
+					echo "<div class='col-md-12'><h4><a href='?action=cate&$groupBy=$group' >$group</a><small > (<span class='count-poem' ></span>)</small></h4><hr></div>";
 				}
 				echo "<div class='col-md-3 poem-item' ><a href='?action=detail&poemId=$poem[poemId]' >$poem[title]</a></div>";
 			}
@@ -64,4 +64,9 @@ $groupBy = $data['groupBy'];
 	$("form.cate").on("change" , "input[type=radio]",function(){
 		$("form.cate").submit();
 	});
+	$(function(){
+		$(".poem-list .row").each(function(){
+			$(this).find(".count-poem").html($(this).find("a").length-1);
+		});
+	})
 </script>
