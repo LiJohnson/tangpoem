@@ -48,7 +48,7 @@ $groupBy = $data['groupBy'];
 					$groups[] = $group;
 					echo "</div>";
 					echo "<div class='row'>";
-					echo "<div class='col-md-12'><h4><a href='?action=cate&$groupBy=$group' >$group</h4><hr></div>";
+					echo "<div class='col-md-12'><h4><a href='?action=cate&$groupBy=$group' >$group</a></h4><hr></div>";
 				}
 				echo "<div class='col-md-3 poem-item' ><a href='?action=detail&poemId=$poem[poemId]' >$poem[title]</a></div>";
 			}
