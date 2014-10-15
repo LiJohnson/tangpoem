@@ -22,7 +22,7 @@ echo "</ul>";
 	<div class="col-md-4">
 		<?php 
 		if( $prev ){
-			echo "<a class='btn btn-warning btn-xs' href='?action=detail&poemId=$prev[poemId]' >上一首</a>";
+			echo "<a class='btn btn-warning btn-xs' data-toggle='tooltip' data-placement='left' title='$prev[title]' href='?action=detail&poemId=$prev[poemId]' >上一首</a>";
 		}
 		?>	
 	</div>
@@ -32,7 +32,7 @@ echo "</ul>";
 	<div class="col-md-4">
 		<?php 
 		if( $next ){
-			echo "<a class='btn btn-warning btn-xs' href='?action=detail&poemId=$next[poemId]' >下一首</a>";
+			echo "<a class='btn btn-warning btn-xs' data-toggle='tooltip' data-placement='rigth' title='$next[title]' href='?action=detail&poemId=$next[poemId]' >下一首</a>";
 		}
 		?>	
 	</div>
@@ -66,5 +66,7 @@ echo preg_replace('/url=\S+/', 'url="'.getPoemURL($data['poemId']).'"', $kv->get
 		$(".play-all").click(function(){
 			player.playFrom(0);
 		});
+
+		$("[data-toggle=tooltip]").tooltip();
 	})
 </script>
