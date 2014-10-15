@@ -27,7 +27,7 @@ if( is_array($data) && $data['page'] ){
 
 $nav = array(
 	array('action'=> 'info' , 'title' => '简介'),
-	array('action'=> 'cate' , 'title' => '目录'),
+	array('action'=> 'cate' , 'title' => '诗集'),
 	array('action' => 'about' , 'title' => '关于'),
 	//array('action' => 'classic' , 'title' => '经典'),
 	array('action' => 'weixin' , 'title' => '微信')
