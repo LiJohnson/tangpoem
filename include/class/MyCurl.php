@@ -27,7 +27,7 @@ class MyCurl{
 		foreach ($this->headers as $key => $value) {
 			$headerArr[] = $key . ":".$value;
 		}
-		$this->setOption(CURLOPT_HTTPHEADER , $headerArr);
+		//$this->setOption(CURLOPT_HTTPHEADER , $headerArr);
 		return curl_exec($this->curlHandle);
 	}
 	

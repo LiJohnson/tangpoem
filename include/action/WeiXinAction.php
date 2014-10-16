@@ -40,21 +40,53 @@ class WeiXinAction extends BaseAction{
 		if( $text[0] == '诗人' ){
 			return $this->viewAuthor($this->authorDao->searchAuthor($text[1]));
 		}
-		if( $text[0] == 'help' || $text[0] == '帮助' ){
+
+		if( strlen($text[0]) < 1 || $text[0] == 'help' || $text[0] == '帮助' ){
 			return $this->viewHelp();
 		}
-
-		$name = $this->isAuthor($text[0]) ? $text[0] : false;
-		$poems = $this->poemDao->searchPoem($name , false , $text[0] , 'rand()' );
 		
-		$poem = count($poems) ? $poems[0] : $this->poemDao->getRand();
-		return $this->viewPoem($poem);
+		return $this->viewPoem($text[0]);
 	}
 
-	private function viewPoem($poem){
-		$content = array("【$poem[title] --$poem[name]】");
-		$content[] = join($poem['content'],"\n");
-		$content[] = "<a href='".getPoemURL($poem['poemId'])."' >详情</a>";
+	/**
+	 * 获取关键字所在的诗句
+	 * @param  [type] $poem [description]
+	 * @param  [type] $key  [description]
+	 * @return [type]       [description]
+	 */
+	private function getMatchContent( $poem , $key ){
+		foreach ($poem['content'] as $content) {
+			//var_dump(strpos( $content , $key));
+			if( $content && strpos( $content , $key) !== false ){
+				return $content;
+			}
+		}
+		return '';
+	}
+
+	private function viewPoem( $key ){
+		$name  = $this->isAuthor($key) ? $key : false;
+		$poems = $this->poemDao->searchPoem($name , false , $key );
+
+		$content = array();
+		$count = count($poems);
+		if( $count > 1 ){
+			$content[] = "共找到".$count."首";
+			foreach ($poems as $i => $poem) {
+				$content[] = ($i+1) . "、<a href='".getPoemURL($poem['poemId'])."'>$poem[title] ($poem[name]) ".  ( $count < 10 ? $this->getMatchContent($poem,$key) : '')."</a>  ";
+			}
+		}else{
+			if( $count == 1 ){
+				$poem = $poems[0];
+			}else{
+				$content[] = "都不知道你要找什么,随便来一首吧";
+				$poem = $this->poemDao->getRand();
+			}
+			$content[] = "【$poem[title] --$poem[name]】";
+			$content[] = join($poem['content'],"\n");
+			$content[] = "<a href='".getPoemURL($poem['poemId'])."' >详情</a>";
+		}
+
 		return join($content , "\n");
 	}
 	private function viewAuthor($authorList){
