@@ -64,6 +64,11 @@ class WeiXinAction extends BaseAction{
 		return '';
 	}
 
+	/**
+	 * 诗歌内容
+	 * @param  [type] $key [description]
+	 * @return [type]      [description]
+	 */
 	private function viewPoem( $key ){
 		$name  = $this->isAuthor($key) ? $key : false;
 		$poems = $this->poemDao->searchPoem($name , false , $key );
@@ -89,9 +94,15 @@ class WeiXinAction extends BaseAction{
 
 		return join($content , "\n");
 	}
+
+	/**
+	 * 回复诗人内容
+	 * @param  [type] $authorList [description]
+	 * @return [type]             [description]
+	 */
 	private function viewAuthor($authorList){
 		if( count($authorList) == 0 ){
-			return "没有要的";
+			return "没有要的诗人";
 		}
 		$content = '';
 		foreach ($authorList as $author) {
@@ -100,6 +111,10 @@ class WeiXinAction extends BaseAction{
 		return $content;
 	}
 
+	/**
+	 * 帮助信息
+	 * @return [type] [description]
+	 */
 	private function viewHelp(){
 		$content[] = '发送[help]或[帮助],可查看帮助文档';
 		$content[] = '发送[诗人 xxx],可查找相关的诗人';
@@ -108,7 +123,3 @@ class WeiXinAction extends BaseAction{
 		return join($content, "\n");
 	}
 }
-
-$commands = array(
-
-);
