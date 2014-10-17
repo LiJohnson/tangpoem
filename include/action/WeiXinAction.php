@@ -58,7 +58,7 @@ class WeiXinAction extends BaseAction{
 		foreach ($poem['content'] as $content) {
 			//var_dump(strpos( $content , $key));
 			if( $content && strpos( $content , $key) !== false ){
-				return $content;
+				return "\n".trim($content);
 			}
 		}
 		return '';
