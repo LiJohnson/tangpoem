@@ -41,7 +41,7 @@ class WeiXinAction extends BaseAction{
 			return $this->viewAuthor($this->authorDao->searchAuthor($text[1]));
 		}
 
-		if( strlen($text[0]) < 1 || $text[0] == 'help' || $text[0] == '帮助' ){
+		if( strlen($text[0]) < 1 || $text[0] == '?' || $text[0] == '？' || $text[0] == 'help' || $text[0] == '帮助' ){
 			return $this->viewHelp();
 		}
 		
