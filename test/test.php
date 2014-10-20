@@ -1,5 +1,3 @@
 <?php
-
-
-var_dump(is_array(array(4,6,7)))	;
-var_dump(is_array(array('a'=>"asdf")))	;
+$a = "明处理就可";
+echo urlencode($a);

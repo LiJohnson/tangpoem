@@ -144,7 +144,7 @@ function getPoemURL($id){
  */
 function getPoemImage($poem){
 	$text = substr($poem['content'][0], 0,3);
-	return getUrl('/weixin/font.php?text=' . $text);
+	return getUrl('/weixin/font.php?text=' . urlencode($text) . '&');
 }
 
 /**
