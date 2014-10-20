@@ -142,7 +142,7 @@ class WeiXinClient{
 
 		$xml = $isChild ? '' : '<xml>';	
 		foreach ($data as $key => $value) {
-			$xml .= "<$key>";
+			$xml .= is_numeric($key) ? '' : "<$key>";
 			if( is_string($value) || is_object($value) ){
 				$xml .= sprintf("<![CDATA[%s]]>",$value) ;
 			}else if( is_array($value) ){
@@ -150,7 +150,7 @@ class WeiXinClient{
 			}else{
 				$xml .= $value;
 			}
-			$xml .= "</$key>";
+			$xml .= is_numeric($key) ? '' : "</$key>";
 		}
 		$xml .= $isChild ? '' : '</xml>';
 

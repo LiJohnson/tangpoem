@@ -58,12 +58,48 @@ class WeiXinAction extends BaseAction{
 		foreach ($poem['content'] as $content) {
 			//var_dump(strpos( $content , $key));
 			if( $content && strpos( $content , $key) !== false ){
-				return "\n".trim($content);
+				return trim($content);
 			}
 		}
-		return '';
+		return '';//$poem['title'] . '---' . $poem['name'];
 	}
 
+	/**
+	 * 以图文信息返回
+	 * @link http://t.cn/R75vsoY
+	 * @param  array $poems 
+	 * @return array 
+	 */
+	private function viewPoemNews($poems,$key){
+		$count = count($poems);
+		$message = array( 'MsgType' => 'news' , 'ArticleCount' => ( $count >= 10 ? 10 : $count+1 ) , 'Articles' => array() );
+
+		$item = array();
+		$item['Title'] = "搜索`$key`,共找到".$count."首";
+		$item['Description'] = '唐诗三百首';
+		$item['PicUrl'] = 'http://ww1.sinaimg.cn/large/5e22416bgw1ekj73ma4tfj207g0b774j.jpg';
+		$item['Url'] = getUrl ('/?action=cate&key='.$key);
+
+		$message['Articles'][]= array('item' => $item );
+
+		foreach ($poems as $poem) {
+			$item = array();
+			$item['Description'] = $this->getMatchContent($poem,$key);
+			$item['Title'] =  $poem['title'] . ' ('.$poem['name'].')' . " " . $item['Description'];
+			$item['Url'] = getPoemURL($poem['poemId']);
+			$message['Articles'][]= array('item' => $item );
+
+			if( count($message['Articles']) == 9 && $count > 9 ){
+				$item = array();
+				$item['Title'] =  '更多';
+				$item['Url'] = getUrl ('/?action=cate&key='.$key);
+				$message['Articles'][]= array('item' => $item );
+
+				return $message;
+			}
+		}
+		return $message;
+	}
 	/**
 	 * 诗歌内容
 	 * @param  [type] $key [description]
@@ -76,10 +112,7 @@ class WeiXinAction extends BaseAction{
 		$content = array();
 		$count = count($poems);
 		if( $count > 1 ){
-			$content[] = "共找到".$count."首";
-			foreach ($poems as $i => $poem) {
-				$content[] = ($i+1) . "、<a href='".getPoemURL($poem['poemId'])."'>$poem[title] ($poem[name]) ".  ( $count < 10 ? $this->getMatchContent($poem,$key) : '')."</a>  ";
-			}
+			return $this->viewPoemNews($poems ,$key);
 		}else{
 			if( $count == 1 ){
 				$poem = $poems[0];

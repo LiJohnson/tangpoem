@@ -136,7 +136,7 @@ function resource( $item ){
  * @return string  url
  */
 function getPoemURL($id){
-	return getUrl("/?action=detail&poemId=" . $id)
+	return getUrl("/?action=detail&poemId=" . $id);
 }
 
 /**
