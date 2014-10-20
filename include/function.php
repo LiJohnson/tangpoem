@@ -111,16 +111,32 @@ function googleAnalytics(){
 }
 
 /**
+ * 获取本网站下的一个链接
+ * @param  [type] $path [description]
+ * @return [type]       [description]
+ */
+function getUrl($path){
+	return SITE_URL . $path;
+}
+
+/**
  * 输出一个资源的URL
  * @param  [type] $item [description]
  * @return [type]       [description]
  */
 function resource( $item ){
-	echo SITE_URL . $item;
+	echo getUrl($item);
 }
 
+
+
+/**
+ * 获取一首诗的链接
+ * @param  int $id poemId
+ * @return string  url
+ */
 function getPoemURL($id){
-	return SITE_URL . "/?action=detail&poemId=" . $id;
+	return getUrl("/?action=detail&poemId=" . $id)
 }
 
 /**
