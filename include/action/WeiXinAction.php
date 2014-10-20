@@ -87,6 +87,7 @@ class WeiXinAction extends BaseAction{
 			$item['Description'] = $this->getMatchContent($poem,$key);
 			$item['Title'] =  $poem['title'] . ' ('.$poem['name'].')' . " " . $item['Description'];
 			$item['Url'] = getPoemURL($poem['poemId']);
+			$item['PicUrl'] = getPoemImage($poem);
 			$message['Articles'][]= array('item' => $item );
 
 			if( count($message['Articles']) == 9 && $count > 9 ){

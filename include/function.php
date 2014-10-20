@@ -128,8 +128,6 @@ function resource( $item ){
 	echo getUrl($item);
 }
 
-
-
 /**
  * 获取一首诗的链接
  * @param  int $id poemId
@@ -137,6 +135,16 @@ function resource( $item ){
  */
 function getPoemURL($id){
 	return getUrl("/?action=detail&poemId=" . $id);
+}
+
+/**
+ * 获取一首诗的图片
+ * @param  object $poem 
+ * @return string       url
+ */
+function getPoemImage($poem){
+	$text = substr($poem['content'][0], 0,3);
+	return getUrl('/weixin/font.php?text=' . $text);
 }
 
 /**
