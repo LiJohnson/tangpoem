@@ -14,20 +14,8 @@ $groupBy = $data['groupBy'];
 				</label>
 			</div>
 		</div>
-		<div class="col-md-8">
+		<div class="col-md-8 hide">
 			<input type="hidden" name="action" value="cate" />
-			<div class="form-group">
-				<lable for="type" >分类</label>
-				<select name="type" id="type" class="form-control" >
-					<option value="">全部</option>
-					<?php 
-					foreach ($data['types'] as $type) {
-						echo "<option value='$type' ". ($_GET['type'] == $type ? 'selected' : '') ." >$type</option>";
-					}
-					?>
-				</select>
-			</div>
-
 			<div class="form-group">
 				<input class="form-control" type="search" name="key" placeholder="作者 标题 内容" value="<?= $_GET['key'] ?>">
 			</div>

@@ -8,8 +8,8 @@
 	font-family: @fontFamily;
 	.nav.navbar-left{
 		>li>a{
-			padding-left: 40px;
-			padding-right: 40px;
+			padding-left: 30px;
+			padding-right: 30px;
 		}
 	}
 
@@ -30,6 +30,20 @@
 		background-color: transparent;
 		border: none;
 		font-size: 15px;
+	}
+
+	.poem-search{
+		width:50%;
+		opacity:0.3;
+		.transition(all 0.3s ease-in-out);
+		&.focus{
+			width:100%;
+			opacity:1;
+		}
+		.input-group-addon{
+			cursor:pointer;
+		}
+
 	}
 	
 	.info{

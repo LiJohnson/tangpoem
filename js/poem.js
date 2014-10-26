@@ -66,4 +66,16 @@ $(function(){
 			cancel:function(){}
 		});
 	});
+
+	//search form
+	(function($form){
+		$form.find('.input-group-addon').click(function(event) {
+			$form.submit();
+		});
+		$form.find('input[name=key]').focus(function() {
+			$form.addClass('focus');
+		}).blur(function() {
+			$form.toggleClass('focus' , !!$(this).val());
+		});
+	})($("form.poem-search"));
 });

@@ -28,9 +28,10 @@ if( is_array($data) && $data['page'] ){
 $nav = array(
 	array('action'=> 'info' , 'title' => '简介'),
 	array('action'=> 'cate' , 'title' => '诗集'),
-	array('action' => 'about' , 'title' => '关于'),
+	array('action' => 'weixin' , 'title' => '微信'),
+	array('action' => 'about' , 'title' => '关于')
 	//array('action' => 'classic' , 'title' => '经典'),
-	array('action' => 'weixin' , 'title' => '微信')
+	
 );
 
 foreach ($nav as $item) {
@@ -86,8 +87,21 @@ if($content){
 						}
 						?>
 					</ul>
-
+				
 					<ul class="nav navbar-nav navbar-right" >
+						<li>
+							<form class="navbar-form navbar-right poem-search <?=($_GET['key'] ? 'focus' : '') ?>" role="search">
+								<input type="hidden" name="action" value="cate" />
+								<div class="form-group">
+									<div class="input-group">
+										<input type="search" name="key" value="<?=$_GET['key'] ?>" placeholder="作者 标题 内容" class="form-control " >
+										<span type="submit" class="input-group-addon">
+											<i class="glyphicon glyphicon-search"></i>
+										</span>
+									</div>
+								</div>
+							</form>
+						</li>
 						<li class="hide" ><a class="btn btn-default"><i class="glyphicon glyphicon-font"></i></a></li>
 						<?php 
 							$user = getUser();
