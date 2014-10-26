@@ -94,7 +94,7 @@ if($content){
 								<input type="hidden" name="action" value="cate" />
 								<div class="form-group">
 									<div class="input-group">
-										<input type="search" name="key" value="<?=$_GET['key'] ?>" placeholder="作者 标题 内容" class="form-control " >
+										<input type="search" name="key" value="<?=$_GET['key'] ?>" placeholder="标题 作者 内容" class="form-control " >
 										<span type="submit" class="input-group-addon">
 											<i class="glyphicon glyphicon-search"></i>
 										</span>
