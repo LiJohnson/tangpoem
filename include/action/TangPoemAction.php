@@ -5,6 +5,7 @@ include ACTION_PATH . '/BaseAction.php';
 include CLASS_PATH . '/BaseDao.php';
 include DAO_PATH . '/PoemDao.php';
 include DAO_PATH . '/AuthorDao.php';
+include DAO_PATH . '/GoodDao.php';
 include CLASS_PATH . '/MyLogin.php';
 /**
  * @author lcs
@@ -14,11 +15,13 @@ include CLASS_PATH . '/MyLogin.php';
 class TangPoemAction extends BaseAction{
 	
 	private $poemDao;
+	private $goodDao;
 	private $author;
 
 	public function __construct(){
 		$this->poemDao = new PoemDao();
 		$this->authorDao = new AuthorDao();
+		$this->goodDao = new GoodDao();
 	}
 
 	/**
@@ -52,6 +55,7 @@ class TangPoemAction extends BaseAction{
 		if( $poem['poemId'] ){
 			$poem['next'] = $this->poemDao->getNext($poem['poemId']);
 			$poem['prev'] = $this->poemDao->getPrev($poem['poemId']);
+			$poem['good'] = $this->goodDao->get($poem['poemId']);
 		}else{
 			return $this->redirect("?action=info");
 		}
@@ -67,11 +71,11 @@ class TangPoemAction extends BaseAction{
 	}
 
 	/**
-	 * 经典页面
+	 * good
 	 * @return [type] [description]
 	 */
-	public function classic(){
-		return array('page' => 'about');
+	public function good(){
+		return array('result' => $this->goodDao->add( $_POST['poemId'] , $_POST['index'] ) );
 	}
 
 	/**

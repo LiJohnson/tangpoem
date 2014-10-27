@@ -176,3 +176,20 @@ function sendMail($from , $body){
 	var_dump($mail);
 	return $mail->send();
 }
+
+/**
+ * 格式化一个数字
+ * @param  int $num 
+ * @return 
+ */
+function formatNum( $num ){
+	$num *= 1;
+	$num = $num ? $num : 0;
+	if( $num < 1000 ){
+		return $num;
+	}else if( $num < 10000 ){
+		return number_format($num/1000,2) . 'K';
+	}else{
+		return number_format($num/10000,2) . 'W';
+	}
+}

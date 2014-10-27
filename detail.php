@@ -13,7 +13,8 @@ echo "<ul class='list-unstyled poem-content $audioClass' >";
 foreach ($data['content'] as $i => $li) {
 	$start = $data['info']['audioIndex'][$i];
 	$end = $data['info']['audioIndex'][$i+1];
-	echo "<li><span>$li</span> <button class='btn btn-default btn-xs btn-audio' data-start='$start' data-end='$end' ><i class='glyphicon glyphicon-volume-down' ></i> </button></li>";
+	echo "<li><span>$li</span> <div class='btn-group' ><button class='btn btn-default btn-xs btn-audio' data-start='$start' data-end='$end' ><i class='glyphicon glyphicon-volume-down' ></i> </button>";
+	echo "<button class='btn btn-default btn-xs btn-good' data-index='$i' data-poem-id='$poemId' ><i class='glyphicon glyphicon-thumbs-up' ></i>(<small>".formatNum($good[$i])."</small>)</button></div></li>";
 }
 echo "</ul>";
 ?>
@@ -68,5 +69,13 @@ echo preg_replace('/url=\S+/', 'url="'.getPoemURL($data['poemId']).'"', $kv->get
 		});
 
 		$("[data-toggle=tooltip]").tooltip();
+
+		$(".poem-content ").on( "click" , ".btn.btn-good:not(.active)" , function(){
+			var $this = $(this);
+			$this.addClass('active');
+			$this.find('small').html( ( $this.find('small').text()*1 || 0 ) + 1 )
+
+			$.post('?action=good',$this.data(),function(data){});
+		} );
 	})
 </script>
