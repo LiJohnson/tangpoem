@@ -92,13 +92,9 @@ if($content){
 						<li>
 							<form class="navbar-form navbar-right poem-search <?=($_GET['key'] ? 'focus' : '') ?>" role="search">
 								<input type="hidden" name="action" value="cate" />
-								<div class="form-group">
-									<div class="input-group">
-										<input type="search" name="key" value="<?=$_GET['key'] ?>" placeholder="标题 作者 内容" class="form-control " >
-										<span type="submit" class="input-group-addon">
-											<i class="glyphicon glyphicon-search"></i>
-										</span>
-									</div>
+								<div class="form-group has-feedback">
+									<input type="search" name="key" value="<?=$_GET['key'] ?>" placeholder="标题 作者 内容" class="form-control " >
+									<i class="btn glyphicon glyphicon-search form-control-feedback"></i>
 								</div>
 							</form>
 						</li>

@@ -69,7 +69,7 @@ $(function(){
 
 	//search form
 	(function($form){
-		$form.find('.input-group-addon').click(function(event) {
+		$form.find('.glyphicon-search').click(function() {
 			$form.submit();
 		});
 		$form.find('input[name=key]').focus(function() {
