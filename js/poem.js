@@ -51,17 +51,23 @@
 $(function(){
 	$(document).on("click","[click-feedback]",function(){
 		var $form =  $("form.feedback").clone().removeClass('hide');
-		$.box({
+		var $box = $.box({
 			title:"意见反馈",
 			html:$form,
 			ok:function(){
+				var $this = $(this);
 				if( !$form.check(function($input,result){
 					$input.parents(".form-group").toggleClass('has-error',!result);
 					return false;
 				}))return false;
-				$form.postData(siteUrl+"/?action=feedback",function(data){
-					$.box("<h2 style='text-align=center' >THX!</h2>");
+
+				$.back("<i class='ion-loading-d'></i>").css("zIndex",9999);
+				$form.postData(siteUrl+"/?action=feedback",{url:location.href},function(data){
+					$this.remove();
+					$.back("close");
+					$box.find(".modal-body").html("<h3 class='text-center' >反馈成功,THX!</h3>");
 				});
+				return false;
 			},
 			cancel:function(){}
 		});
