@@ -2,8 +2,8 @@
 $groupBy = $data['groupBy'];
 ?>
 <div class="row">
-	
 	<form class="form-inline cate" action="<?=getAction('cate')?>" role="form" >
+		<input type="hidden" name="action" value="cate" >
 		<div class="col-md-4" >
 			<div class="btn-group" data-toggle="buttons">
 				<label class="btn btn-primary <?php echo $data['groupByType'] ;?>">

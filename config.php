@@ -8,6 +8,8 @@ define("ACTION_PATH" , INCLUDE_PATH . '/action');
 define("UPLOAD_PATH" , BASE_PATH . '/upload');
 define("IS_LOCAL" , !defined('SAE_TMP_PATH') );
 
+define("REWRITE_ON", true);
+
 //webbm
 define( "WB_AKEY" , '713047838' );
 define( "WB_SKEY" , 'edb01a4f899c7455436f3605571ac6a1' );

@@ -1,10 +1,11 @@
-#ErrorDocument 404 /sae/webbm/2/index.php?action=notFound
+ErrorDocument 404 /sae/webbm/2/index.php?action=notFound
 #
 RewriteEngine On
 #
 #RewriteRule ^(.*)/$ /$1 [L,R=301]
 #
 #RewriteRule index\.php route.php [L]
+#RewriteRule ^(.*)[^/]$ route.php [L]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d

@@ -134,7 +134,8 @@ function resource( $item ){
  * @return string  url
  */
 function getPoemURL($id){
-	//return getAction("detail&poemId=" . $id);
+	if( REWRITE_ON !== true)
+		return getAction("detail&poemId=" . $id);
 	return getAction('poem/'.$id);
 	
 }
@@ -145,11 +146,13 @@ function getPoemURL($id){
  * @return [type]         [description]
  */
 function getAction($action , $param = '' ){
-	//if( $param ) $param = '&' . $param;
-	//return getUrl('?action=' . $action . $param );
+	if( REWRITE_ON !== true ){
+		if( $param ) $param = '&' . $param;
+		return getUrl('?action=' . $action . $param );
+	}
 
 	if( $param ) $param = '?' . $param;
-	return getUrl('/r/' . $action .  $param );
+	return getUrl('/' . $action .  $param );
 }
 
 /**

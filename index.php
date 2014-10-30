@@ -28,7 +28,7 @@ if( is_array($data) && $data['page'] ){
 $nav = array(
 	array('action'=> 'info' , 'title' => '简介'),
 	array('action'=> 'cate' , 'title' => '诗集'),
-	array('action' => 'weixin' , 'title' => '微信'),
+	array('action' => 'wechat' , 'title' => '微信'),
 	array('action' => 'about' , 'title' => '关于')
 	//array('action' => 'classic' , 'title' => '经典'),
 	
@@ -87,12 +87,13 @@ if($content){
 						}
 						?>
 					</ul>
-				
+
 					<ul class="nav navbar-nav navbar-right" >
 						<li>
 							<form action="<?=getAction('cate')?>"  class="navbar-form navbar-right poem-search <?=($_GET['key'] ? 'focus' : '') ?>" role="search">
+								<input type="hidden" name="action" value="cate" >
 								<div class="form-group has-feedback">
-									<input type="search" name="key" value="<?=$_GET['key'] ?>" placeholder="标题 作者 内容" class="form-control " >
+									<input type="search" name="key" value="<?=$_GET['key'] ?>" placeholder="标题 作者 内容" class="form-control" autocomplete="false" >
 									<i class="btn glyphicon glyphicon-search form-control-feedback"></i>
 								</div>
 							</form>
@@ -113,9 +114,9 @@ if($content){
 							}
 							?>
 
-							<li><a href="?action=logout">退出</a></li>
+							<li><a href="<?=getAction('logout')?>">退出</a></li>
 						<?php }else{ ?>
-							<li><a href="?action=wbAuth">微博登录</a></li>
+							<li><a href="<?=getAction('wbAuth')?>">微博登录</a></li>
 						<?php } ?>
 					</ul>
 					</div>
@@ -124,7 +125,7 @@ if($content){
 	</header>
 
 	<div class="container <?php echo $action; ?>" >
-		<?php include BASE_PATH . "/$page.php";  // var_dump($_SESSION); ?>
+		<?php include BASE_PATH . "/view/$page.php";  // var_dump($_SESSION); ?>
 	</div>
 	<?php
 		googleAnalytics();

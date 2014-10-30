@@ -82,8 +82,8 @@ class TangPoemAction extends BaseAction{
 	 * 微信页面
 	 * @return [type] [description]
 	 */
-	public function weixin(){
-		return array('page' => 'weixin/page');
+	public function wechat(){
+		return array('page' => '../weixin/page');
 	}
 
 	/**
