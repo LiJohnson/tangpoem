@@ -12,6 +12,12 @@ $page = $action = preg_replace('/\-/', '_', $action);
 
 $tangPoemAction = new TangPoemAction();
 
+if( !method_exists($tangPoemAction , $action)  ){
+	header('HTTP/1.1 404 Not Found');
+	header("status: 404 Not Found");
+	$action="notFound";
+}
+
 $data = call_user_func(array(&$tangPoemAction , $action) , array('action' => $action));
 
 if( is_array($data) )extract($data);
