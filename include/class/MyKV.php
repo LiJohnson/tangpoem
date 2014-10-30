@@ -2,6 +2,7 @@
 
 function testMongo(){
 	if( !class_exists('MongoClient') )return false;
+	return false;
 	try{
 		new MongoClient();
 	}catch(Exception $e){

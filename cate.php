@@ -3,7 +3,7 @@ $groupBy = $data['groupBy'];
 ?>
 <div class="row">
 	
-	<form class="form-inline cate" action="?action=cate" role="form" >
+	<form class="form-inline cate" action="<?=getAction('cate')?>" role="form" >
 		<div class="col-md-4" >
 			<div class="btn-group" data-toggle="buttons">
 				<label class="btn btn-primary <?php echo $data['groupByType'] ;?>">
@@ -15,7 +15,6 @@ $groupBy = $data['groupBy'];
 			</div>
 		</div>
 		<div class="col-md-8 hide">
-			<input type="hidden" name="action" value="cate" />
 			<div class="form-group">
 				<input class="form-control" type="search" name="key" placeholder="作者 标题 内容" value="<?= $_GET['key'] ?>">
 			</div>
@@ -36,9 +35,9 @@ $groupBy = $data['groupBy'];
 					$groups[] = $group;
 					echo "</div>";
 					echo "<div class='row'>";
-					echo "<div class='col-md-12'><h4><a href='?action=cate&$groupBy=$group' >$group</a><small > (<span class='count-poem' ></span>)</small></h4><hr></div>";
+					echo "<div class='col-md-12'><h4><a href='". getAction('cate' , $groupBy.'='.$group) ."' >$group</a><small > (<span class='count-poem' ></span>)</small></h4><hr></div>";
 				}
-				echo "<div class='col-md-3 poem-item' ><a href='?action=detail&poemId=$poem[poemId]' >$poem[title]</a></div>";
+				echo "<div class='col-md-3 poem-item' ><a href='". getPoemURL($poem['poemId']) ."' >$poem[title]</a></div>";
 			}
 		}else{
 			echo "没有找到你要的哦~";	

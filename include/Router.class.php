@@ -123,11 +123,9 @@ class PoemRouter extends Router{
 	public function __construct(){
 		$requestPath = $this->requestPath();
 		parent::__construct(function($routes,$param) use ($requestPath){
-			var_dump($requestPath);
 			$paths = preg_split('/\//', $requestPath);
 			foreach ($routes as $route) {
 				if( $requestPath === $route )return true;
-
 				$m = PoemRouter::match( preg_split('/\//', $route) , $paths );
 				if( $m ) return $m;
 			}

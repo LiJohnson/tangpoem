@@ -119,4 +119,8 @@ class TangPoemAction extends BaseAction{
 		$login->logout();
 		return $this->redirect(SITE_URL);
 	}
+
+	public function notFound(){
+		return array("page" => "404");
+	}
 }

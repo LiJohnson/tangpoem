@@ -6,7 +6,7 @@ include CLASS_PATH . '/MyKV.php';
 header("Content-Type:text/html; charset=utf-8");
 $kv = new MyKV();
 
-$action = $_GET['action'] ? $_GET['action'] : 'info';
+$action = $action ? $action : ($_GET['action'] ? $_GET['action'] : 'info');
 
 $page = $action = preg_replace('/\-/', '_', $action);
 
@@ -83,15 +83,14 @@ if($content){
 						<?php
 						foreach ($nav as $item) {
 							$cur = $action == $item['action'] ? 'class=active' : '';
-							echo "<li $cur ><a href='?action=$item[action]'>$item[title]</a></li>";
+							echo "<li $cur ><a href='".getAction($item['action'])."'>$item[title]</a></li>";
 						}
 						?>
 					</ul>
 				
 					<ul class="nav navbar-nav navbar-right" >
 						<li>
-							<form class="navbar-form navbar-right poem-search <?=($_GET['key'] ? 'focus' : '') ?>" role="search">
-								<input type="hidden" name="action" value="cate" />
+							<form action="<?=getAction('cate')?>"  class="navbar-form navbar-right poem-search <?=($_GET['key'] ? 'focus' : '') ?>" role="search">
 								<div class="form-group has-feedback">
 									<input type="search" name="key" value="<?=$_GET['key'] ?>" placeholder="标题 作者 内容" class="form-control " >
 									<i class="btn glyphicon glyphicon-search form-control-feedback"></i>
@@ -109,7 +108,7 @@ if($content){
 							<?php
 							if( checkAdmin() ){
 								?>
-								<li><a href="admin/" >后台</a></li>
+								<li><a href="<?=getUrl('/admin/')?>" >后台</a></li>
 								<?php
 							}
 							?>

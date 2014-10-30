@@ -134,7 +134,22 @@ function resource( $item ){
  * @return string  url
  */
 function getPoemURL($id){
-	return getUrl("/?action=detail&poemId=" . $id);
+	//return getAction("detail&poemId=" . $id);
+	return getAction('poem/'.$id);
+	
+}
+
+/**
+ * 获取一个请求url
+ * @param  [type] $action [description]
+ * @return [type]         [description]
+ */
+function getAction($action , $param = '' ){
+	//if( $param ) $param = '&' . $param;
+	//return getUrl('?action=' . $action . $param );
+
+	if( $param ) $param = '?' . $param;
+	return getUrl('/r/' . $action .  $param );
 }
 
 /**
