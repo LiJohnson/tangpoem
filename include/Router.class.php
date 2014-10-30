@@ -128,7 +128,7 @@ class PoemRouter extends Router{
 			foreach ($routes as $route) {
 				if( $requestPath === $route )return true;
 
-				$m = AdminRoute::match( preg_split('/\//', $route) , $paths );
+				$m = PoemRouter::match( preg_split('/\//', $route) , $paths );
 				if( $m ) return $m;
 			}
 			return false;
