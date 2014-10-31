@@ -1,5 +1,5 @@
 <?php 
-include 'config.php';
+include __DIR__ . '/config.php';
 include INCLUDE_PATH . '/function.php';
 include ACTION_PATH . '/TangPoemAction.php';
 include CLASS_PATH . '/MyKV.php';
@@ -129,8 +129,12 @@ if($content){
 			</div>
 		</nav>
 	</header>
-
+	
 	<div class="container <?php echo $action; ?>" >
+		
+	<?php
+		googleAD();
+	?>
 		<?php include BASE_PATH . "/view/$page.php";  // var_dump($_SESSION); ?>
 	</div>
 	<?php

@@ -111,6 +111,27 @@ function googleAnalytics(){
 }
 
 /**
+ * google ad
+ * @return void
+ */
+function googleAD(){
+	if( IS_LOCAL )return;
+	?>
+	<div class='row' >
+		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+		<!-- poem -->
+		<ins class="adsbygoogle"
+		     style="display:inline-block;width:100%;height:50px"
+		     data-ad-client="ca-pub-6329536529674735"
+		     data-ad-slot="1478174006"></ins>
+		<script>
+		(adsbygoogle = window.adsbygoogle || []).push({});
+		</script>
+	</div>
+	<?php
+}
+
+/**
  * 获取本网站下的一个链接
  * @param  [type] $path [description]
  * @return [type]       [description]
@@ -190,8 +211,7 @@ function sendMail($from , $body){
 	$mail->addAddress('598420668@163.com', 'ahah');
 
 	$mail->Subject = '意见反馈【唐诗三百首】';
-	$mail->Body = $body . "\r\nfrom " . $from ;
-	var_dump($mail);
+	$mail->Body = $body . "\r\nfrom : " . $from . "\r\n\r\n" . $_POST['url'];
 	return $mail->send();
 }
 
