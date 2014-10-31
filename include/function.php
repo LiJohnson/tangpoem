@@ -195,20 +195,21 @@ function getPoemImage($poem){
 function sendMail($from , $body){
 	//c20524f14
 	require INCLUDE_PATH . "/PHPMailer/PHPMailerAutoload.php";
-
+	$kv = new MyKV();
 	$mail = new PHPMailer();
-	$mail->SMTPDebug = 2;
+
+	$mail->SMTPDebug = 0;
 	$mail->isSMTP();
 	$mail->Host = 'smtp.163.com';
 	$mail->Port = 25;
 	$mail->SMTPAuth = true;
 	$mail->CharSet = 'utf-8';
 
-	$mail->Username = 'c20524f14@163.com';
-	$mail->Password = 'ac20524f14';
-	$mail->setFrom('c20524f14@163.com', 'tangPoem');
+	$mail->Username = $kv->get('email');
+	$mail->Password = $kv->get('emailPass');
+	$mail->setFrom($kv->get('email'), 'tangPoem');
 
-	$mail->addAddress('598420668@163.com', 'ahah');
+	$mail->addAddress($kv->get('sendTo'), 'ahah');
 
 	$mail->Subject = '意见反馈【唐诗三百首】';
 	$mail->Body = $body . "\r\nfrom : " . $from . "\r\n\r\n" . $_POST['url'];

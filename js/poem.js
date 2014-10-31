@@ -61,7 +61,7 @@ $(function(){
 					return false;
 				}))return false;
 
-				$.back("<i class='ion-loading-b'></i>").css("zIndex",9999);
+				$.back("<i class='fa fa-spin fa-cog'></i>").css("zIndex",9999);
 				$form.postData(siteUrl+"/?action=feedback",{url:location.href},function(data){
 					$this.remove();
 					$.back("close");

@@ -3,11 +3,15 @@
 		<form class="form-horizontal" action="?action=tool"  method="post">
 			<?php
 			foreach ($data as $key => $value) {
+				echo '<div class=form-group >';
 				echo "<label for=$key>$key</label>";
-				echo "<textarea name=$key class=form-control >$value</textarea>";
+				echo "<input type=text name=$key class=form-control value='$value' >";
+				echo '</div>';
 			}
 			?>
-			<input type="submit" class="btn btn-primary" value="save">
+			<div class=form-group >
+				<input type="submit" class="btn btn-primary" value="save">
+			</div>
 		</form>
 	</div>
 </div>

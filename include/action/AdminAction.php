@@ -44,14 +44,14 @@ class AdminAction extends BaseAction{
 	 * @return [type] [description]
 	 */
 	public function tool(){
-		$keys = array('comment' => '' , 'login' => '');
-		foreach ( $keys as $key => $val) {
+		$keys = array('comment' , 'email' , 'emailPass', 'sendTo');
+		foreach ( $keys as $key ) {
 			if( isset($_POST[$key]) ){
 				$this->kv->set($key , $_POST[$key]);
 			}
-			$keys[$key] = $this->kv->get($key);
+			$data[$key] = $this->kv->get($key);
 		}
-		return $keys;
+		return $data;
 	}
 
 	/**
