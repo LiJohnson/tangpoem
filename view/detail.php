@@ -75,7 +75,7 @@ echo preg_replace('/url=\S+/', 'url="'.getPoemURL($data['poemId']).'"', $kv->get
 			$this.addClass('active');
 			$this.find('small').html( ( $this.find('small').text()*1 || 0 ) + 1 )
 
-			$.post('?action=good',$this.data(),function(data){});
+			$.post('<?=getAction("good")?>',$this.data(),function(data){});
 		} );
 	})
 </script>
