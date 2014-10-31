@@ -31,7 +31,7 @@ class GoodDao extends BaseDao{
 	 * @return 
 	 */
 	public function get( $poemId ){
-		$goods = $this->getList(array('goodId' => $goodId));
+		$goods = $this->getList(array('poemId' => $poemId));
 		if( !is_array($goods) ){
 			return array('poemId' => $poemId);
 		}
