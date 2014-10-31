@@ -13,6 +13,9 @@
 			<li>
 				有什么想说的可以<a href="javascript:;" click-feedback > <i class='fa fa-send'></i> 点这里</a>
 			</li>
+			<li>
+				<a href="http://www.miitbeian.gov.cn" class='text-muted' target="_blank"><small>粤ICP备14081423号</small></a>
+			</li>
 		</ul>
 	<div>
 </footer>
