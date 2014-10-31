@@ -57,7 +57,7 @@ class TangPoemAction extends BaseAction{
 			$poem['prev'] = $this->poemDao->getPrev($poem['poemId']);
 			$poem['good'] = $this->goodDao->get($poem['poemId']);
 		}else{
-			return $this->redirect("?action=info");
+			return $this->redirect(getAction('info'));
 		}
 		return $poem;
 	}
