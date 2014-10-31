@@ -11,7 +11,7 @@
 				<a href='https://github.com/LiJohnson/tangpoem' class='fa fa-github' target="_blank" ></a>
 			</li>
 			<li>
-				有什么想说的可以<a href="javascript:;" click-feedback >点这里<i class='genericon-chat' ></i></a>
+				有什么想说的可以<a href="javascript:;" click-feedback > <i class='fa fa-send'></i> 点这里</a>
 			</li>
 		</ul>
 	<div>

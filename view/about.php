@@ -29,7 +29,7 @@
 					开发者
 				</label>
 				<div class="col-md-10 checkbox">
-					<a href="http://www.weibo.com/lijohnson" target="_blank">@盛404</a>
+					<a href="http://www.weibo.com/lijohnson" target="_blank" class="fa fa-weibo" > @盛404</a>
 				</div>
 			</div>
 			<div class="form-group">
@@ -37,7 +37,7 @@
 				
 				</label>
 				<div class="col-md-10 checkbox">
-					<a href='javascript:;' click-feedback >意见反馈</a>
+					<a href='javascript:;' click-feedback class='fa fa-send' > 意见反馈</a>
 				</div>
 			</div>
 		</div>
