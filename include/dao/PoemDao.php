@@ -179,5 +179,29 @@ class PoemDao extends BaseDao{
 	public function getRand(){
 		return $this->unserPoem($this->getLine( $this->selectSql . " ORDER BY rand()"));
 	}
+
+	/**
+	 * 每日一首
+	 * @return [type] [description]
+	 */
+	public function daily(){
+		if( !class_exists('MyKV') ){
+			include CLASS_PATH . '/MyKV.php';
+		}
+		$kv = new MyKV();
+
+		$dailyTime = $kv->get('dailyTime');
+		$poemId = $kv->get('dailyPoemId');
+
+		
+		$now = time();
+		if( $now > $dailyTime ){
+			$poemId = $this->getNext($poemId);
+			$poemId = $poemId['poemId'];
+			$kv->set('dailyTime',mktime(0, 0, 0, date("m")  , date("d")+1, date("Y")));
+			$kv->set('dailyPoemId',$poemId);
+		}
+		return $this->getById($poemId);
+	}
 }
 ?>

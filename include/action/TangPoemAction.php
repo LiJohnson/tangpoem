@@ -62,6 +62,12 @@ class TangPoemAction extends BaseAction{
 		return $poem;
 	}
 
+	public function daily(){
+		$poem = $this->poemDao->daily();
+	//	$poem['page'] = 'detail';
+		return $poem;
+	}
+
 	/**
 	 * 关于页面
 	 * @return [type] [description]
