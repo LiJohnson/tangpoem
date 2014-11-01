@@ -94,7 +94,11 @@ class PoemDao extends BaseDao{
 	 * @return [type]     [description]
 	 */
 	public function getNext( $id ){
-		return $this->getById($id , 'next');
+		$poem = $this->getById($id , 'next');
+		if( !$poem ){
+			$poem = $this->getById( $this->getVar('SELECT MIN(poemId) FROM poem ') );
+		}
+		return $poem;
 	}
 
 	/**
@@ -103,7 +107,11 @@ class PoemDao extends BaseDao{
 	 * @return [type]     [description]
 	 */
 	public function getPrev( $id ){
-		return $this->getById($id , 'prev');
+		$poem = $this->getById($id , 'prev');
+		if( !$poem ){
+			$poem = $this->getById( $this->getVar('SELECT MAX(poemId) FROM poem ') );
+		}
+		return $poem;
 	}
 
 	/**

@@ -6,7 +6,7 @@ $audioClass =  preg_match('/^http/', $data['audio']) ? '' : 'no-audio';
 echo "<h1 class='$audioClass' ><span class='play-all btn-audio'><i class='glyphicon glyphicon-volume-down' ></i></span>$data[title]<small>$data[name]</small></h1>";
 
 if( checkAdmin() ){
-	echo "<p><a href=admin/?action=poem&poemId=$data[poemId] target='_blank'>edit</a></p>";
+	echo '<p><a href='.getUrl('/admin/?action=poem&poemId='.$data['poemId']).' target=_blank>edit</a></p>';
 }
 
 echo "<ul class='list-unstyled poem-content $audioClass' >";
