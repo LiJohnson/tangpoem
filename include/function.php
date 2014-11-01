@@ -194,7 +194,10 @@ function getPoemImage($poem){
  */
 function sendMail($from , $body){
 	//c20524f14
-	require INCLUDE_PATH . "/PHPMailer/PHPMailerAutoload.php";
+	if( !class_exists('PHPMailer') ){
+		require INCLUDE_PATH . "/PHPMailer/PHPMailerAutoload.php";
+	}
+	
 	$kv = new MyKV();
 	$mail = new PHPMailer();
 
