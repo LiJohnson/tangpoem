@@ -64,6 +64,7 @@ class TangPoemAction extends BaseAction{
 
 	public function daily(){
 		$poem = $this->poemDao->daily();
+		$poem['url'] = getPoemURL( $poem['poemId'] );
 	//	$poem['page'] = 'detail';
 		return $poem;
 	}
