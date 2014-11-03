@@ -1,3 +1,3 @@
-<h1 class='text-center' style='font-size:500px;font-family:Papyrus,Georgia, "Times New Roman", "Bitstream Charter", Times, serif;' >
-	4<span class='ion-spin' >0</span>4
-</1>
+<h1 class='text-center poem-404' >
+	<span>4</span><span>0</span><span>4</span>
+</h1>

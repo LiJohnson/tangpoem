@@ -162,6 +162,35 @@
 			text-shadow:rgb(107, 107, 107) -6px 7px 26px;
 		}
 	}
+	.poem-404{
+		@fontSize:500px;
+		@rotate:360deg;
+		@margin:@rotate/360deg*@fontSize*2;
+		font-size:@fontSize;
+		font-family:Papyrus,Georgia, "Times New Roman", "Bitstream Charter", Times, serif;
+		cursor:default;
+		margin-left:0;
+
+		span{
+			.transition(all 1.5s ease-in-out);
+		}
+		
+		
+		&:hover{
+			span:nth-child(1){
+				//margin-left: -@margin;
+				// .transform(rotate(-@rotate));
+			}
+			span:nth-child(2){
+				//margin-left: @margin ;
+				//font-size:@fontSize/2;			
+			}
+			span:nth-child(3){
+				margin-left: @margin;
+				 .transform(rotate(@rotate));				
+			}
+		}
+	}
 	
 }
 
