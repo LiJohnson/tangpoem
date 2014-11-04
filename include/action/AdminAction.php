@@ -140,5 +140,37 @@ class AdminAction extends BaseAction{
 
 		return array('adminId' => $adminId);
 	}
+
+	public function stat(){
+		$kv = new MyKV();
+
+		if( $_POST['update'] ){
+			$stat = array();
+			$poems = $this->poemDao->getAll();
+			foreach ($poems as $poem) {
+				$stat['text'][] = join($poem['content'], '');
+			}
+			$stat['text'] = join($stat['text'], '');
+			preg_match_all(	'/([\x{4e00}-\x{9fa5}]){1}/u', $stat['text']  ,$res);
+			$data = array();
+			//var_dump($res);exit();
+			foreach ($res[0] as $char) {
+				$key = self::char2key($char);
+				if( $data[$key] ){
+					$data[$key]['count']++;
+				}else{
+					$data[$key]=array('char'=>$char , 'count' =>1);
+				}
+			}
+			$stat['data'] = $data;
+			$kv->set('stat',$stat);
+		}
+
+		return $kv->get('stat');
+	}
+
+	private static function char2key($char){
+		return md5($char);
+	}
 }
 ?>

@@ -127,7 +127,25 @@ class TangPoemAction extends BaseAction{
 		return $this->redirect(SITE_URL);
 	}
 
+	/**
+	 * 404页面
+	 * @return [type] [description]
+	 */
 	public function notFound(){
 		return array("page" => "404");
+	}
+
+	/**
+	 * [stat description]
+	 * @return [type] [description]
+	 */
+	public function stat(){
+		$data = array();
+		$kv = new MyKV();
+		$stat = $kv->get('stat');
+		foreach ( $stat['data'] as $key ) {
+			$data[] = array($key['char'] , $key['count']);
+		}
+		return $data;
 	}
 }

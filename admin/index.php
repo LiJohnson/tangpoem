@@ -3,6 +3,7 @@ session_start();
 include '../config.php';
 include INCLUDE_PATH . '/function.php';
 include ACTION_PATH . '/AdminAction.php';
+//include CLASS_PATH . '/MyKV.php';
 
 
 if( !checkAdmin() ){
@@ -28,6 +29,7 @@ $nav = array(
 	array('page'=> 'poem' , 'title' => '诗'),
 	array('page'=> 'author' , 'title' => '作者'),
 	array('page'=> 'user' , 'title' => '用户'),
+	array('page'=> 'stat' , 'title' => '统计'),
 	array('page'=> 'tool' , 'title' => '工具')
 	);
 ?>
