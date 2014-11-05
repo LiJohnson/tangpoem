@@ -1,8 +1,17 @@
 <script src="http://code.highcharts.com/highcharts.js"></script>
 <div id="stat">
 </div>
+<hr>
+<div class="row" >
+	<h3>不重复共出现<b class="text-info"><?=count($text)?></b>个字:</h3>
+	<p class="text-danger">
+		<?=join($text,'')?>
+	</p>
+</div>
+<textarea name="text" class="hide"><?=$text?></textarea>
 <script>
 	var DATA = <?=json_encode($data)?>;
+	var TEXT = $("textarea[name=text]").val();
 	$(function(){
 
 		var statData = (function(){

@@ -141,11 +141,13 @@ class TangPoemAction extends BaseAction{
 	 */
 	public function stat(){
 		$data = array();
+		$text = array();
 		$kv = new MyKV();
 		$stat = $kv->get('stat');
 		foreach ( $stat['data'] as $key ) {
 			$data[] = array($key['char'] , $key['count']);
+			$text[] = $key['char'];
 		}
-		return $data;
+		return array('data' => $data , 'text' =>$text);
 	}
 }
