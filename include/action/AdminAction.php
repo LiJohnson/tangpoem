@@ -141,6 +141,10 @@ class AdminAction extends BaseAction{
 		return array('adminId' => $adminId);
 	}
 
+	/**
+	 * 统计
+	 * @return [type] [description]
+	 */
 	public function stat(){
 		$kv = new MyKV();
 

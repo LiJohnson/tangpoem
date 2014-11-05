@@ -27,40 +27,50 @@
 		})();
 
 		$('#stat').highcharts({
-        chart: {
-            type: 'bar',
-            height:statData.length*30
-        },
-        title: {
-            text: '各汉字出现频率（仅显示大于等于10次）'
-        },
-        xAxis: { 
-        	type: 'category',
-        	 labels: {
-               // rotation: -45
-            }
-            
-        },
-        yAxis: {
-            min: 0,
-            title: {
-                text: '出现频率/次'
-            }
-        },
-        legend: {
-            reversed: true
-        },
-        plotOptions: {
-            series: {
-                stacking: 'normal'
-            }
-        },
-        tooltip: {
-            pointFormat: '<b>{point.y}次,{point.title}</b>'
-        },
-        series: [{
-            data: statData
-        }]
-    });
+		chart: {
+			type: 'bar',
+			height:statData.length*30,
+			options3d: {
+				//enabled: true,
+				//alpha: 15,
+				//beta: 15,
+				//depth: 500,
+				//viewDistance: 25
+			}
+		},
+		title: {
+			text: '各汉字出现频率（仅显示大于等于10次）'
+		},
+		xAxis: { 
+			type: 'category',
+			 labels: {
+			   // rotation: -45
+			},
+			title: {
+				text: null
+			}
+			
+		},
+		yAxis: {
+			min: 0,
+			title: {
+				text: '出现频率/次'
+			}
+		},
+		legend: {
+		   enabled: false
+		},
+		plotOptions: {
+			series: {
+				stacking: 'normal'
+			}
+		},
+		tooltip: {
+			pointFormat: '<b>{point.y}次,{point.title}</b>'
+		},
+		series: [{
+			data: statData
+		}]
+	});
 	});
 </script>
