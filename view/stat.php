@@ -32,7 +32,7 @@
             height:statData.length*30
         },
         title: {
-            text: '各汉字出现频率'
+            text: '各汉字出现频率（仅显示大于等于10次）'
         },
         xAxis: { 
         	type: 'category',
