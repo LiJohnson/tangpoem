@@ -35,6 +35,7 @@ $nav = array(
 	array('action'=> 'info' , 'title' => '简介'),
 	array('action'=> 'cate' , 'title' => '诗集'),
 	array('action' => 'wechat' , 'title' => '微信'),
+	array('action' => 'stat' , 'title' => '统计'),
 	array('action' => 'about' , 'title' => '关于')
 	//array('action' => 'classic' , 'title' => '经典'),
 	
