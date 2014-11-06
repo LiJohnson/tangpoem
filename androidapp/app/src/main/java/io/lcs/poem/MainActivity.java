@@ -23,8 +23,6 @@ public class MainActivity extends Activity {
 			getFragmentManager().beginTransaction()
 					.add(R.id.container, new PlaceholderFragment())
 					.commit();
-			WebView wv = (WebView) findViewById(R.id.webView);
-			wv.loadUrl("http://lcs.com");
 		}
 	}
 
@@ -63,6 +61,9 @@ public class MainActivity extends Activity {
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 		                         Bundle savedInstanceState) {
 			View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+			WebView wv = (WebView)rootView.findViewById(R.id.webView);
+			wv.getSettings().setJavaScriptEnabled(true);
+			wv.loadUrl( this.getResources().getString( R.string.poem_url ) );
 			return rootView;
 		}
 	}
