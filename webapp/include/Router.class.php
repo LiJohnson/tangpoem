@@ -162,7 +162,7 @@ class PoemRouter extends Router{
 	 */
 	private function requestPath(){
 		$scriptName = $_SERVER['SCRIPT_NAME'];
-		$baseUrl = preg_replace('/[^\/]+$/', '', $scriptName);
+		$baseUrl = preg_replace('/http:\/\/[^\/]+\//', '/', SITE_URL);
 		$phpPath = substr(preg_replace('/\?.*$/', '', $_SERVER['REQUEST_URI']), strlen($baseUrl));
 		return $this->formatPath($phpPath);
 	}

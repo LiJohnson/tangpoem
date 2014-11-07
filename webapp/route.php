@@ -1,6 +1,7 @@
 <?php
 
 include __DIR__ . '/include/Router.class.php';
+include __DIR__ . '/config.php';
 
 $a = new PoemRouter();
 

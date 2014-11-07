@@ -19,7 +19,7 @@ if( !IS_LOCAL ){
 	define("MY_DB_NAME" , false);
 }else{
 
-	define("SITE_URL" , 'http://lcs.com/sae/webbm/2');
+	define("SITE_URL" , 'http://lcs.com/poem');
 
 	define("MY_DB_HOST" , 'lcs.com');
 	define("MY_DB_NAME" , 'poem');
