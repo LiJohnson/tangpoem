@@ -30,6 +30,7 @@ $nav = array(
 	array('page'=> 'author' , 'title' => '作者'),
 	array('page'=> 'user' , 'title' => '用户'),
 	array('page'=> 'stat' , 'title' => '统计'),
+	array('page'=> 'export' , 'title' => '导出'),
 	array('page'=> 'tool' , 'title' => '工具')
 	);
 ?>

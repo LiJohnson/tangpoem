@@ -173,6 +173,20 @@ class AdminAction extends BaseAction{
 		return $kv->get('stat');
 	}
 
+	/**
+	 * 导出数据
+	 * @return 
+	 */
+	public function export(){
+		if( $_POST['export']){
+			header('Content-Type: application/force-download');
+            header('Content-Disposition: attachment; filename=poem.json');
+			echo json_encode($this->poemDao->getAll());
+			exit();
+		}
+		return array();
+	}
+
 	private static function char2key($char){
 		return md5($char);
 	}
