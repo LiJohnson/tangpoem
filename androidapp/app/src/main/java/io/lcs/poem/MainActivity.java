@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import android.os.Build;
 import android.webkit.WebView;
 
+import io.lcs.poem.dao.PoemDao;
+
 
 public class MainActivity extends Activity {
 
@@ -61,9 +63,8 @@ public class MainActivity extends Activity {
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 		                         Bundle savedInstanceState) {
 			View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-			WebView wv = (WebView)rootView.findViewById(R.id.webView);
-			wv.getSettings().setJavaScriptEnabled(true);
-			wv.loadUrl( this.getResources().getString( R.string.poem_url ) );
+			this.getResources().openRawResource(R.raw.poem);
+			PoemDao poemDao = new PoemDao( this.getResources().openRawResource(R.raw.poem));
 			return rootView;
 		}
 	}

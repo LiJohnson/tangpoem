@@ -7,24 +7,33 @@
                 android:paddingTop="@dimen/activity_vertical_margin"
                 android:paddingBottom="@dimen/activity_vertical_margin"
                 tools:context=".MainActivity$PlaceholderFragment"
-                android:background="@drawable/ic_launcher">
+                android:background="#14f2f143">
 
 	<TextView
-		android:text="@string/hello_world"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:id="@+id/textView"/>
-
-	<WebView
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:id="@+id/webView"
-		android:layout_alignParentLeft="true"
-		android:layout_alignParentStart="true"
-		android:layout_alignParentBottom="true"
-		android:layout_alignParentRight="true"
-		android:layout_alignParentEnd="true"
+		android:text="@string/title"
+		android:id="@+id/title"
+		android:textColor="#ff0b0f2b"
+		android:textSize="34sp"
+		android:gravity="center"
 		android:layout_alignParentTop="true"
-		android:background="#00000000"/>
+		android:layout_centerHorizontal="true"/>
 
+	<ImageView
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:id="@+id/imageView"
+		android:layout_alignParentEnd="true"
+		android:layout_alignParentStart="true"
+		android:background="@drawable/wx_30cm"
+		android:alpha="0.05"
+		android:contentDescription="@string/background_description"/>
+
+	<GridView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:id="@+id/poemList"
+		android:layout_below="@+id/title"
+		android:layout_alignParentStart="true"/>
 </RelativeLayout>
