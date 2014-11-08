@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,7 +12,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
 import android.webkit.WebView;
+import android.widget.ArrayAdapter;
+import android.widget.GridView;
+import android.widget.ListView;
 
+import io.lcs.poem.adapter.PoemListAdapter;
 import io.lcs.poem.dao.PoemDao;
 
 
@@ -63,8 +68,10 @@ public class MainActivity extends Activity {
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 		                         Bundle savedInstanceState) {
 			View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-			this.getResources().openRawResource(R.raw.poem);
-			PoemDao poemDao = new PoemDao( this.getResources().openRawResource(R.raw.poem));
+
+			GridView gv = (GridView) rootView.findViewById(R.id.poemList);
+			gv.setAdapter( new PoemListAdapter( inflater  ));
+
 			return rootView;
 		}
 	}
