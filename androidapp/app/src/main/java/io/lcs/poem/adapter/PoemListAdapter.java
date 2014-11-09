@@ -53,6 +53,7 @@ public class PoemListAdapter extends BaseAdapter {
 		((TextView)view.findViewById(R.id.poemItemTitle)).setText(poem.getTitle());
 
 		view.setBackgroundResource(  i%2 == 0 ? R.color.poem_item : R.color.poem_item_2 );
+		view.setTag( poem );
 
 		return view;
 	}

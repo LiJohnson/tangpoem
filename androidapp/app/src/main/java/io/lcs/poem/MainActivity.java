@@ -1,7 +1,6 @@
 package io.lcs.poem;
 
 import android.app.Activity;
-import android.app.ActionBar;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,14 +9,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.os.Build;
-import android.webkit.WebView;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import io.lcs.poem.adapter.PoemListAdapter;
-import io.lcs.poem.dao.PoemDao;
+import io.lcs.poem.event.PoemItemEvent;
+import io.lcs.poem.pojo.Poem;
 
 
 public class MainActivity extends Activity {
@@ -32,7 +31,6 @@ public class MainActivity extends Activity {
 					.commit();
 		}
 	}
-
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -62,15 +60,40 @@ public class MainActivity extends Activity {
 	public static class PlaceholderFragment extends Fragment {
 
 		public PlaceholderFragment() {
+
 		}
 
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 		                         Bundle savedInstanceState) {
 			View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-
+		//	Log.i("shit",this.getTag());
 			GridView gv = (GridView) rootView.findViewById(R.id.poemList);
 			gv.setAdapter( new PoemListAdapter( inflater  ));
+			gv.setOnItemClickListener( new PoemItemEvent.Click());
+			return rootView;
+		}
+	}
+
+	/**
+	 * A poem fragment
+	 */
+	public static class PoemFragment extends Fragment {
+
+		public PoemFragment(){
+		}
+
+		@Override
+		public View onCreateView(LayoutInflater inflater, ViewGroup container,
+		                         Bundle savedInstanceState) {
+			View rootView = inflater.inflate(R.layout.fragment_poem, container, false);
+			Poem poem = (Poem)this.getArguments().getSerializable("poem");
+			((TextView)rootView.findViewById(R.id.title)).setText(poem.getTitle());
+			((TextView)rootView.findViewById(R.id.author)).setText(poem.getName());
+
+			ListView lv = (ListView)rootView.findViewById(R.id.content);
+			ArrayAdapter aa = new ArrayAdapter( rootView.getContext() , R.layout.poem_content ,R.id.poem_content_item , poem.getContent());
+			lv.setAdapter(aa);
 
 			return rootView;
 		}
