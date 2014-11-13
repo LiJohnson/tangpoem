@@ -22,7 +22,7 @@ function baseJSCSS(){
 	<script>$.box = $.box3 || $.box;</script>
 	
 
-	<link rel="shutcut icon" href="<?php resource('/img/T.png');?>"/>
+	<link rel="shutcut icon" href="<?php resource('/img/32.png');?>"/>
 	<link rel="stylesheet"   href="<?php resource('/css/poem.css'); ?>"/>
 	<link rel="stylesheet"   href="<?php resource('/css/myPlayer.css'); ?>"/>
 	<script src="<?php resource('/js/myPlayer.js'); ?>" ></script>
