@@ -21,6 +21,7 @@ public class PoemDao {
 		Gson g = new Gson( );
 		Type listType = new TypeToken<List<Poem>>(){}.getType();
 		this.poemList = g.fromJson(new InputStreamReader( inputStream ), listType);
+
 	}
 
 	public List<Poem> getPoemList() {

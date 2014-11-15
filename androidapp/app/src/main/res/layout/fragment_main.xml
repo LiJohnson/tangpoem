@@ -9,17 +9,6 @@
                 tools:context=".MainActivity$PlaceholderFragment"
                 android:background="#14f2f143">
 
-	<TextView
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:text="@string/title"
-		android:id="@+id/title"
-		android:textColor="#ff0b0f2b"
-		android:textSize="34sp"
-		android:gravity="center"
-		android:layout_alignParentTop="true"
-		android:layout_centerHorizontal="true"/>
-
 	<ImageView
 		android:layout_width="fill_parent"
 		android:layout_height="fill_parent"
@@ -34,6 +23,5 @@
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:id="@+id/poemList"
-		android:layout_below="@+id/title"
 		android:layout_alignParentStart="true"/>
 </RelativeLayout>

@@ -1,14 +1,17 @@
 package io.lcs.poem;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.ListView;
@@ -20,14 +23,17 @@ import io.lcs.poem.pojo.Poem;
 
 
 public class MainActivity extends Activity {
+	private Fragment mainFragment;
+	private Fragment poemFragment;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+		this.setContentView(R.layout.activity_main);
 		if (savedInstanceState == null) {
-			getFragmentManager().beginTransaction()
-					.add(R.id.container, new PlaceholderFragment())
+			this.mainFragment = new MainFragment();
+			this.getFragmentManager().beginTransaction()
+					.add(R.id.container, this.mainFragment)
 					.commit();
 		}
 	}
@@ -49,28 +55,47 @@ public class MainActivity extends Activity {
 		//noinspection SimplifiableIfStatement
 		if (id == R.id.action_settings) {
 			return true;
+		}else if( id == android.R.id.home ){
+			this.getFragmentManager().popBackStack();
+			return false;
 		}
-
 		return super.onOptionsItemSelected(item);
+	}
+
+	public void showPoem( Poem poem ){
+		this.poemFragment = new PoemFragment();
+		Bundle b = new Bundle();
+		b.putSerializable("poem",poem);
+		this.poemFragment.setArguments(b);
+
+		this.getFragmentManager().beginTransaction()
+				.replace(R.id.container,this.poemFragment)
+				.addToBackStack(null)
+				.commit();
 	}
 
 	/**
 	 * A placeholder fragment containing a simple view.
 	 */
-	public static class PlaceholderFragment extends Fragment {
-
-		public PlaceholderFragment() {
-
+	public static class MainFragment extends Fragment {
+		public MainFragment() {
 		}
 
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 		                         Bundle savedInstanceState) {
+			final MainActivity activity = (MainActivity) this.getActivity();
 			View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-		//	Log.i("shit",this.getTag());
 			GridView gv = (GridView) rootView.findViewById(R.id.poemList);
-			gv.setAdapter( new PoemListAdapter( inflater  ));
-			gv.setOnItemClickListener( new PoemItemEvent.Click());
+			gv.setAdapter(new PoemListAdapter(inflater));
+
+			gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+				@Override
+				public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+					activity.showPoem((Poem) view.getTag());
+				}
+			});
+
 			return rootView;
 		}
 	}
@@ -79,7 +104,7 @@ public class MainActivity extends Activity {
 	 * A poem fragment
 	 */
 	public static class PoemFragment extends Fragment {
-
+		private ActionBar actionBar;
 		public PoemFragment(){
 		}
 
@@ -87,6 +112,7 @@ public class MainActivity extends Activity {
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 		                         Bundle savedInstanceState) {
 			View rootView = inflater.inflate(R.layout.fragment_poem, container, false);
+
 			Poem poem = (Poem)this.getArguments().getSerializable("poem");
 			((TextView)rootView.findViewById(R.id.title)).setText(poem.getTitle());
 			((TextView)rootView.findViewById(R.id.author)).setText(poem.getName());
@@ -96,6 +122,25 @@ public class MainActivity extends Activity {
 			lv.setAdapter(aa);
 
 			return rootView;
+		}
+
+		@Override
+		public void onAttach(Activity activity) {
+			super.onAttach(activity);
+
+			this.actionBar = activity.getActionBar();
+			this.actionBar.setDisplayHomeAsUpEnabled(true);
+			this.actionBar.setDisplayShowHomeEnabled(false);
+		}
+
+		@Override
+		public void onDetach(){
+			super.onDetach();
+
+			if( this.actionBar == null )return;
+
+			this.actionBar.setDisplayShowHomeEnabled(true);
+			this.actionBar.setDisplayHomeAsUpEnabled(false);
 		}
 	}
 }
