@@ -3,9 +3,10 @@
     <string name="app_name">唐诗三百首</string>
     <string name="hello_world">Hello world!</string>
 	<string name="action_settings">Settings</string>
-	<string name="poem_url">http://lcs.com/sae/webbm/2/</string>
 	<string name="title">唐诗三百首</string>
 	<string name="background_description">背景</string>
 	<string name="fragment_main_tag">fragment_main_tag</string>
 	<string name="fragment_poem_tag">fragment_poem_tag</string>
+	<string name="poem_link">详情</string>
+	<string name="poem_url">http://poem.lcs.io/poem/</string>
 </resources>

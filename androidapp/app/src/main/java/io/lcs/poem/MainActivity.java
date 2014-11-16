@@ -3,6 +3,8 @@ package io.lcs.poem;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -112,7 +114,7 @@ public class MainActivity extends Activity {
 		                         Bundle savedInstanceState) {
 			View rootView = inflater.inflate(R.layout.fragment_poem, container, false);
 
-			Poem poem = (Poem)this.getArguments().getSerializable("poem");
+			final Poem poem = (Poem)this.getArguments().getSerializable("poem");
 			((TextView)rootView.findViewById(R.id.title)).setText(poem.getTitle());
 			((TextView)rootView.findViewById(R.id.author)).setText(poem.getName());
 
@@ -120,6 +122,14 @@ public class MainActivity extends Activity {
 			ArrayAdapter aa = new ArrayAdapter( rootView.getContext() , R.layout.poem_content ,R.id.poem_content_item , poem.getContent());
 			lv.setAdapter(aa);
 
+			rootView.findViewById(R.id.poemLink).setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					Uri uri = Uri.parse( getString(R.string.poem_url) + poem.getPoemId() );
+					Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+					startActivity(intent);
+				}
+			});
 			return rootView;
 		}
 
