@@ -67,7 +67,7 @@ public class MainActivity extends Activity {
 
 		this.getFragmentManager().beginTransaction()
 				//.setCustomAnimations( android.R.animator.fade_in , android.R.animator.fade_out )
-				.setCustomAnimations(R.anim.slide_in, R.anim.slide_out)
+				.setCustomAnimations(R.anim.slide_left_in, R.anim.slide_left_out,R.anim.slide_right_in, R.anim.slide_right_out)
 				.replace(R.id.container, this.poemFragment)
 				.addToBackStack(null)
 				.commit();
