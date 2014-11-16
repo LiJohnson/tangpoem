@@ -3,9 +3,7 @@ package io.lcs.poem;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
-import android.app.FragmentManager;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,7 +16,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import io.lcs.poem.adapter.PoemListAdapter;
-import io.lcs.poem.event.PoemItemEvent;
 import io.lcs.poem.pojo.Poem;
 
 
@@ -69,7 +66,9 @@ public class MainActivity extends Activity {
 		this.poemFragment.setArguments(b);
 
 		this.getFragmentManager().beginTransaction()
-				.replace(R.id.container,this.poemFragment)
+				//.setCustomAnimations( android.R.animator.fade_in , android.R.animator.fade_out )
+				.setCustomAnimations(R.anim.slide_in, R.anim.slide_out)
+				.replace(R.id.container, this.poemFragment)
 				.addToBackStack(null)
 				.commit();
 	}
