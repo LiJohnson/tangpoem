@@ -9,4 +9,5 @@
 	<string name="fragment_poem_tag">fragment_poem_tag</string>
 	<string name="poem_link">详情</string>
 	<string name="poem_url">http://poem.lcs.io/poem/</string>
+	<string name="search">搜索</string>
 </resources>

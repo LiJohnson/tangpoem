@@ -6,6 +6,8 @@ import android.app.Fragment;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -86,15 +89,30 @@ public class MainActivity extends Activity {
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 		                         Bundle savedInstanceState) {
 			final MainActivity activity = (MainActivity) this.getActivity();
+			final PoemListAdapter adapter = new PoemListAdapter(inflater);
+
 			View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 			GridView gv = (GridView) rootView.findViewById(R.id.poemList);
-			gv.setAdapter(new PoemListAdapter(inflater));
+			gv.setAdapter(adapter);
 
 			gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 				@Override
 				public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 					activity.showPoem((Poem) view.getTag());
 				}
+			});
+
+			((EditText) rootView.findViewById(R.id.search)).addTextChangedListener( new TextWatcher() {
+				@Override
+				public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {}
+				@Override
+				public void afterTextChanged(Editable editable) {}
+				@Override
+				public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+					adapter.update(charSequence.toString());
+				}
+
+
 			});
 
 			return rootView;

@@ -24,7 +24,7 @@ public class PoemListAdapter extends BaseAdapter {
 	public PoemListAdapter( LayoutInflater inflater ){
 		this.inflater = inflater;
 		this.poemDao = new PoemDao( this.inflater.getContext().getResources().openRawResource(R.raw.poem) );
-		Collections.sort( this.poemDao.getPoemList() , new PYSort() );
+
 	}
 
 	@Override
@@ -58,11 +58,10 @@ public class PoemListAdapter extends BaseAdapter {
 		return view;
 	}
 
-	private static class PYSort implements  Comparator<Poem>{
-		@Override
-		public int compare(Poem poem, Poem poem2) {
-			Comparator cmp = Collator.getInstance(java.util.Locale.CHINA);
-			return cmp.compare( poem.getTitle() , poem2.getTitle() );
-		}
+	public void update( String key ){
+		this.poemDao.update(key);
+		this.notifyDataSetChanged();
 	}
+
+
 }
