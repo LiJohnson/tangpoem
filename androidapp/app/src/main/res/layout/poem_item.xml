@@ -3,20 +3,22 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:background="@color/poem_item_2">
+              android:background="@color/poem_item_2" android:weightSum="1">
 
 	<TextView
-		android:layout_width="349dp"
+		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
 		android:text="title"
 		android:id="@+id/poemItemTitle"
-		android:gravity="left"/>
+		android:gravity="left" android:textSize="15dp"
+		/>
 
 	<TextView
-		android:layout_width="340dp"
+		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
 		android:text="author"
 		android:id="@+id/poemItemAuthor"
-		android:gravity="right"/>
+		android:gravity="right" android:minWidth="300dp" android:minLines="1"
+		/>
 
 </LinearLayout>
