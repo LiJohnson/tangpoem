@@ -3,14 +3,18 @@ package io.lcs.poem;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -21,20 +25,35 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import io.lcs.poem.adapter.PoemListAdapter;
+import io.lcs.poem.event.PoemEvent;
 import io.lcs.poem.pojo.Poem;
 
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity  implements GestureDetector.OnGestureListener {
 	private Fragment mainFragment;
 	private Fragment poemFragment;
+	private GestureDetector gestureDetector;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		this.setContentView(R.layout.activity_main);
 		if (savedInstanceState == null) {
+			final FragmentManager fragmentManager = this.getFragmentManager();
+			this.gestureDetector = new GestureDetector( this.getApplicationContext() , new PoemEvent.OnSwipe() {
+				@Override
+				public boolean swipeLeft() {
+					return false;
+				}
+
+				@Override
+				public boolean swipeRight() {
+					fragmentManager.popBackStack();
+					return false;
+				}
+			});
 			this.mainFragment = new MainFragment();
-			this.getFragmentManager().beginTransaction()
+			fragmentManager.beginTransaction()
 					.add(R.id.container, this.mainFragment)
 					.commit();
 		}
@@ -61,7 +80,13 @@ public class MainActivity extends Activity {
 			this.getFragmentManager().popBackStack();
 			return false;
 		}
+
 		return super.onOptionsItemSelected(item);
+	}
+
+	@Override
+	public boolean onTouchEvent( MotionEvent event ){
+		return this.gestureDetector.onTouchEvent(event);
 	}
 
 	public void showPoem( Poem poem ){
@@ -76,6 +101,37 @@ public class MainActivity extends Activity {
 				.replace(R.id.container, this.poemFragment)
 				.addToBackStack(null)
 				.commit();
+	}
+
+	@Override
+	public boolean onDown(MotionEvent motionEvent) {
+		return false;
+	}
+
+	@Override
+	public void onShowPress(MotionEvent motionEvent) {
+
+	}
+
+	@Override
+	public boolean onSingleTapUp(MotionEvent motionEvent) {
+		return false;
+	}
+
+	@Override
+	public boolean onScroll(MotionEvent motionEvent, MotionEvent motionEvent2, float v, float v2) {
+		return false;
+	}
+
+	@Override
+	public void onLongPress(MotionEvent motionEvent) {
+
+	}
+
+	@Override
+	public boolean onFling(MotionEvent motionEvent, MotionEvent motionEvent2, float v, float v2) {
+		Log.i("shit","onFling");
+	return false;
 	}
 
 	/**
@@ -111,8 +167,6 @@ public class MainActivity extends Activity {
 				public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
 					adapter.update(charSequence.toString());
 				}
-
-
 			});
 
 			return rootView;
@@ -140,14 +194,16 @@ public class MainActivity extends Activity {
 			ArrayAdapter aa = new ArrayAdapter( rootView.getContext() , R.layout.poem_content ,R.id.poem_content_item , poem.getContent());
 			lv.setAdapter(aa);
 
-			rootView.findViewById(R.id.poemLink).setOnClickListener(new View.OnClickListener() {
+			rootView.findViewById(R.id.poemLink);
+			rootView.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					Uri uri = Uri.parse( getString(R.string.poem_url) + poem.getPoemId() );
+					Uri uri = Uri.parse(getString(R.string.poem_url) + poem.getPoemId());
 					Intent intent = new Intent(Intent.ACTION_VIEW, uri);
 					startActivity(intent);
 				}
 			});
+
 			return rootView;
 		}
 
@@ -156,6 +212,9 @@ public class MainActivity extends Activity {
 			super.onAttach(activity);
 
 			this.actionBar = activity.getActionBar();
+
+			if( this.actionBar == null )return;
+
 			this.actionBar.setDisplayHomeAsUpEnabled(true);
 			this.actionBar.setDisplayShowHomeEnabled(false);
 		}
