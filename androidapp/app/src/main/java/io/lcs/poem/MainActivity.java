@@ -38,6 +38,7 @@ public class MainActivity extends Activity  implements GestureDetector.OnGesture
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		this.setContentView(R.layout.activity_main);
+
 		if (savedInstanceState == null) {
 			final FragmentManager fragmentManager = this.getFragmentManager();
 			this.gestureDetector = new GestureDetector( this.getApplicationContext() , new PoemEvent.OnSwipe() {
@@ -74,9 +75,7 @@ public class MainActivity extends Activity  implements GestureDetector.OnGesture
 		int id = item.getItemId();
 
 		//noinspection SimplifiableIfStatement
-		if (id == R.id.action_settings) {
-			return true;
-		}else if( id == android.R.id.home ){
+		if( id == android.R.id.home ){
 			this.getFragmentManager().popBackStack();
 			return false;
 		}
