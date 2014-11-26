@@ -60,7 +60,7 @@ if($content){
 ?>
 
 <!DOCTYPE html>
-<html lang="en" xmlns:wb="http://open.weibo.com/wb">
+<html lang="zh" xmlns:wb="http://open.weibo.com/wb">
 <head>
 	<meta charset="UTF-8">
 	<meta name="keywords" content="唐诗三百首,唐诗,唐诗精选,古诗三百首,唐诗朗读,古诗朗读,在线朗读,分句朗读,续句朗读" />
