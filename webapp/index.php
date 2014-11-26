@@ -48,7 +48,7 @@ foreach ($nav as $item) {
 	}
 }
 $cur = $cur ? $cur : $nav[0];
-$title = is_array($data) && $data['title'] ? $data['title'] : $cur['title'];
+$title = is_array($data) && $data['title'] ? $data['title'] . ' | ' . $data['name'] : $cur['title'];
 ?>
 
 
