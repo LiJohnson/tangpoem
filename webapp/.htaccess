@@ -7,6 +7,7 @@ RewriteEngine On
 #RewriteRule index\.php route.php [L]
 #RewriteRule ^(.*)[^/]$ route.php [L]
 
+RewriteBase /poem/
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^ route.php  
