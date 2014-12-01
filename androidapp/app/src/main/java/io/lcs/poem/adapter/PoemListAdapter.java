@@ -59,6 +59,9 @@ public class PoemListAdapter extends BaseAdapter {
 	}
 
 	public void update( String key ){
+		if( key != null ){
+			key = key.trim();
+		}
 		this.poemDao.update(key);
 		this.notifyDataSetChanged();
 	}

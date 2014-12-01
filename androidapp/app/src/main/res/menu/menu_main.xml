@@ -7,4 +7,10 @@
 	      android:orderInCategory="100"
 	      android:showAsAction="never"/>
 	      -->
+	<item
+		android:id="@+id/menu_search"
+		android:showAsAction="ifRoom"
+		android:actionLayout="@layout/menu_search"
+		android:icon="@android:drawable/ic_menu_search"
+		android:title="@string/menu_search"/>
 </menu>
