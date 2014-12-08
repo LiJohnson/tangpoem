@@ -15,7 +15,7 @@ define( "WB_AKEY" , '713047838' );
 define( "WB_SKEY" , 'edb01a4f899c7455436f3605571ac6a1' );
 
 if( !IS_LOCAL ){
-	define("SITE_URL" , 'http://webbm.sinaapp.com');
+	define("SITE_URL" , 'http://'.$_SERVER["HTTP_HOST"]);
 	define("MY_DB_NAME" , false);
 }else{
 
